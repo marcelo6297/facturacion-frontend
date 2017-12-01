@@ -1,0 +1,25 @@
+<div class="cliente-container">
+  <mat-form-field>
+    <input matInput placeholder="Nombre"  [(ngModel)]="cliente.nombre">
+  </mat-form-field>
+  
+  <mat-form-field>
+    <input matInput placeholder="Apellido" [(ngModel)]="cliente.apellido">
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <mat-select placeholder="Tipo" [(ngModel)]="tipo">
+     <mat-option *ngFor="let tipo of tipos" [value] = "tipo" >
+      {{ tipo.nombre }}
+    </mat-option>
+    </mat-select>
+  </mat-form-field>
+    
+  <mat-form-field>
+    <textarea matInput placeholder="Textarea"></textarea>
+  </mat-form-field>
+    
+  <button mat-button (click)=back()>Volver</button>
+  <button mat-button (click)=saveOrUpdate()>Guardar</button>  
+</div>

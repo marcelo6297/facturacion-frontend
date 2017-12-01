@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Spring Angular 4';
+  title = 'Facturacion V0.1';
+  showSideNav = false;
+  toogleSideNav() {
+      this.showSideNav = !this.showSideNav;
+  }
 }

@@ -1,14 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
+<mat-toolbar>
+    <a mat-button (click)=toogleSideNav() > Menu</a>
     Welcome to {{ title }}!
-  </h1>
-</div>
+</mat-toolbar>
 
 <mat-sidenav-container >
-  <mat-sidenav mode="side" opened="true">
+  <mat-sidenav mode="side" opened="{{showSideNav}}">
       <nav>
           <a routerLink="/clientes">Clientes</a>
+          <a routerLink="/clientes/new">Nuevo Cliente</a>
         </nav>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -1,35 +1,46 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, 
+import { 
+  MatButtonModule, 
   MatCheckboxModule,
   MatTableModule,
-  MatSidenav,
+  MatToolbarModule,
   MatSidenavModule,
-  MatSidenavContent} from '@angular/material';
+  MatFormFieldModule,
+  MatSelectModule,
+  MatInputModule
+  } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
   
 import { AppComponent } from './app.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClienteComponent
+    ClienteComponent,
+    ClienteDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+//    Material
+    MatToolbarModule,
     MatButtonModule, 
     MatCheckboxModule,
     MatTableModule,
     MatSidenavModule,
-    BrowserAnimationsModule,
-    AppRoutingModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

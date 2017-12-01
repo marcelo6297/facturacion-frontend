@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import  { MatTableDataSource } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 
 import { Cliente} from './cliente';
@@ -21,12 +24,11 @@ export class ClienteComponent implements OnInit {
   clientes : Cliente[];
   showMsg = false;
 
-  constructor(private service: ClientesService) {}
+  constructor(private route: ActivatedRoute, private location: Location, private service: ClientesService) {}
   
   ngOnInit() { 
     
     this.getClientes();
-    this.dataSource = new MatTableDataSource<Cliente>(this.clientes);
     
   }
   

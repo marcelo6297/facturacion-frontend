@@ -18,7 +18,7 @@
 </div>
 
 
-<div class="example-container">
+<div>
     <mat-table #clientes [dataSource]="dataSource">
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
@@ -38,11 +38,11 @@
         </ng-container>
         <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-            <mat-cell *matCellDef="let item"> <a (click)=onSelect(item)>Borrar </a></mat-cell>
+            <mat-cell *matCellDef="let item"> <a mat-button (click)=onSelect(item)>Borrar </a></mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-    <button mat-button>Nuevo</button>
+    <button mat-button routerLink="/clientes/new">Nuevo</button>
     <button mat-button>Editar</button>
 </div>
