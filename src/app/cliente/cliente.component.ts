@@ -3,11 +3,12 @@ import { DataSource } from '@angular/cdk/table';
 import  { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ClientesService } from '../servicios/clientes.service';
+import { Cliente } from '../modelo/cliente';
 
 
 
-import { Cliente} from './cliente';
-import { ClientesService } from './clientes.service';
+
 
 @Component({
   selector: 'app-cliente',
@@ -21,7 +22,7 @@ export class ClienteComponent implements OnInit {
   dataSource: MatTableDataSource<Cliente> ;
   displayedColumns = ['id', 'nombre', 'apellido', 'estado', 'acciones'];
   selectedCliente: Cliente ;
-  clientes : Cliente[];
+  clientes: Cliente[];
   showMsg = false;
 
   constructor(private route: ActivatedRoute, private location: Location, private service: ClientesService) {}

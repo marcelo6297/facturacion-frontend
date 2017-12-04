@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+
 import { 
   MatButtonModule, 
   MatCheckboxModule,
@@ -9,22 +12,30 @@ import {
   MatSidenavModule,
   MatFormFieldModule,
   MatSelectModule,
-  MatInputModule
-  } from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-  
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatCardModule,
+  MatListModule,
+  MatPaginatorModule,
+  MatSortModule
+} from '@angular/material';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { AppComponent } from './app.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
+import { ProductosComponent } from './productos/productos.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ClienteComponent,
-    ClienteDetailComponent
+    ClienteDetailComponent,
+    ProductosComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +51,14 @@ import { ClienteDetailComponent } from './cliente-detail/cliente-detail.componen
     MatSidenavModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatListModule,
+    MatPaginatorModule,
+  MatSortModule,  
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

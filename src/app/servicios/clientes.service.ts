@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { CLIENTES } from './clientes-mock';
-import { Cliente } from './cliente';
-import { Tipo } from './cliente';
+
+import { Cliente } from './../modelo/cliente';
+import { Tipo } from './../modelo/cliente';
 
 @Injectable()
 export class ClientesService {

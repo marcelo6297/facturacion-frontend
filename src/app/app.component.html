@@ -1,21 +1,35 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar>
-    <a mat-button (click)=toogleSideNav() > Menu</a>
-    Welcome to {{ title }}!
-</mat-toolbar>
+<section class="app container" fxLayout="column" fxLayoutAlign="start stretch">
+  <mat-toolbar color="primary" class="mat-elevation-z10">
+    <a mat-button (click)=toogleSideNav()> Menu</a>
+    Bienvenido a {{ title }}!
+  </mat-toolbar>
 
-<mat-sidenav-container >
-  <mat-sidenav mode="side" opened="{{showSideNav}}">
-      <nav>
-          <a routerLink="/clientes">Clientes</a>
-          <a routerLink="/clientes/new">Nuevo Cliente</a>
-        </nav>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-    
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <mat-sidenav-container class="container" fxFlex>
+    <mat-sidenav mode="side" opened="{{showSideNav}}" class="mat-elevation-z6">
+
+      <mat-toolbar>
+        <span></span>
+        <div layout="column" class="md-toolbar-tools-bottom">
+          <span></span>
+          <div>Firstname Lastname</div>
+          <div>email@domainname.com</div>
+        </div>
+      </mat-toolbar>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let item of menu" routerLink="{{item.ruta}}">
+          <a>
+            <div class="inset"> {{item.titulo}}</div>
+          </a>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
 
 
+      <router-outlet></router-outlet>
 
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</section>

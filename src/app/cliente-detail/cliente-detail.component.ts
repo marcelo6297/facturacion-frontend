@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { ClientesService} from '../cliente/clientes.service';
-import { Tipo, Cliente } from '../cliente/cliente';
+import { ClientesService} from './../servicios/clientes.service';
+import { Tipo, Cliente } from './../modelo/cliente';
 
 @Component({
   selector: 'app-cliente-detail',
@@ -35,8 +35,10 @@ export class ClienteDetailComponent implements OnInit {
 
   saveOrUpdate() {
       this.cliente.tipo = this.tipo;
-      this.service.saveOrUpdate(this.cliente).subscribe(function(res){
+      this.service.saveOrUpdate(this.cliente).subscribe(res => {
           console.log(res);
+          this.cliente = new Cliente();
+          this.tipo = new Tipo();
       });
   }
 
