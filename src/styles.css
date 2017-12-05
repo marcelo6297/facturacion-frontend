@@ -2,3 +2,7 @@
 /* Incluyendo angular material */
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+md-toolbar {
+    z-index: 10;    
+  }

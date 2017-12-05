@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -28,6 +28,7 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
 import { ProductosComponent } from './productos/productos.component';
+import { FacturacionComponent } from './facturacion/facturacion.component';
 
 
 @NgModule({
@@ -35,11 +36,13 @@ import { ProductosComponent } from './productos/productos.component';
     AppComponent,
     ClienteComponent,
     ClienteDetailComponent,
-    ProductosComponent
+    ProductosComponent,
+    FacturacionComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,

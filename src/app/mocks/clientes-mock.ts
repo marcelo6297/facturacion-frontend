@@ -1,10 +1,12 @@
+import { Cliente } from "../modelo/cliente";
+
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-import { Cliente } from './cliente';
+
 
 // export const CLIENTES: Cliente[] = [
 //   { id: 11, nombre: 'Mr. Nice' , apellido: 'Prueba', activo: true, createdOn: '2017-03-11', tipo: {id:1, nombre: 'prueba', createdOn: '2017-01-20'},

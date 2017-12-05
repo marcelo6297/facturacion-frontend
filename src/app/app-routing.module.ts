@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClienteComponent } from './cliente/cliente.component';
 import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
 import { ProductosComponent } from './productos/productos.component';
+import { FacturacionComponent } from './facturacion/facturacion.component';
 
 const rutas: Routes = [
   {path: '', redirectTo: 'index', pathMatch: 'full'},
@@ -13,6 +14,7 @@ const rutas: Routes = [
   {path: 'clientes/new', component: ClienteDetailComponent, pathMatch: 'full'},
   {path: 'productos', component: ProductosComponent, pathMatch: 'full'},
   {path: 'productos/new', component: ProductosComponent, pathMatch: 'full'},
+  {path: 'facturacion', component: FacturacionComponent, pathMatch: 'full'},
 ];
 
 

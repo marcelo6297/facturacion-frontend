@@ -19,17 +19,12 @@
       <mat-nav-list>
         <mat-list-item *ngFor="let item of menu" routerLink="{{item.ruta}}">
           <a>
-            <div class="inset"> {{item.titulo}}</div>
+            <div> {{item.titulo}}</div>
           </a>
         </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
-
-
-      <router-outlet></router-outlet>
-
-    </mat-sidenav-content>
-
+    <router-outlet></router-outlet>
+    
   </mat-sidenav-container>
 </section>
