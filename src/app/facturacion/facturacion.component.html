@@ -2,19 +2,36 @@
 
   <mat-card>
     <mat-card-header color="primary">
-      Formulario de ingreso de datos Autocompletado cliente
+      Formulario de ingreso de datos Autocompletado cliente {{valor}}
     </mat-card-header>
+    
+    
     <form [formGroup]="pedidosForm" novalidate>
-
+      
       <mat-form-field>
-          <input matInput placeholder="Cliente" formControlName="clienteCtrl">
+        
+        <input matInput placeholder="Cliente" formControlName="cliente" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let cliente of clientes | async" [value]="cliente" >
+            {{ cliente.nombre }}, {{cliente.apellido}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Pedido" formControlName="pedidoCtrl">
+        <input matInput placeholder="Pedido" formControlName="pedido">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Cantidad" formControlName="cantidad">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Precio" formControlName="precio">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Otro" formControlName="otro">
       </mat-form-field>
     </form>
-    
+
   </mat-card>
 
   <mat-card>

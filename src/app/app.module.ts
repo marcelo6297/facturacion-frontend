@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { 
+  MatAutocompleteModule,
   MatButtonModule, 
   MatCheckboxModule,
   MatTableModule,
@@ -47,6 +48,7 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
     BrowserAnimationsModule,
     AppRoutingModule,
 //    Material
+    MatAutocompleteModule,
     MatToolbarModule,
     MatButtonModule, 
     MatCheckboxModule,
