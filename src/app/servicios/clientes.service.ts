@@ -33,6 +33,10 @@ export class ClientesService {
       return this.http.get<string[]>(this.tiposUrl);
   }
 
+  getOne(id: number) {
+    return this.http.get<Cliente>(this.clientesUrl+"/"+id);
+  }
+
   saveOrUpdate(item: Cliente) {
     return this.http.post(this.clientesUrl, item);
   }

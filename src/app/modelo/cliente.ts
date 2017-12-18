@@ -11,11 +11,15 @@ export class Cliente  {
     nombre: string;
     apellido: string;
     ruc: string;
+    telefono: string;
+    direccion: Direccion;
     tipo: Tipo;
     activo: boolean;
+    fechaNacimiento: string;
     createdOn: string;
     constructor(){
         this.tipo = new Tipo();
+        this.direccion = new Direccion();
     }
 }
 
@@ -23,4 +27,9 @@ export class Tipo {
     id: number;
     nombre: string;
     createdOn: string;
+}
+
+export class Direccion {
+    direccion1: string; 
+    direccion2: string;
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -19,35 +19,39 @@ import { Cliente } from '../modelo/cliente';
 })
 export class ClienteComponent implements OnInit {
 
-  
-  dataSource: MatTableDataSource<Cliente> ;
-  displayedColumns = ['id', 'nombre', 'apellido', 'estado', 'tipo','acciones'];
-  selectedCliente: Cliente ;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+
+  dataSource: MatTableDataSource<Cliente>;
+  displayedColumns = ['id', 'nombre', 'apellido', 'ruc', 'estado', 'tipo', 'acciones'];
+  selectedCliente: Cliente;
   clientes: Cliente[];
   showMsg = false;
 
-  constructor(private route: ActivatedRoute, private location: Location, private service: ClientesService) {}
-  
-  ngOnInit() { 
-    
+  constructor(private route: ActivatedRoute, private location: Location, private service: ClientesService) { }
+
+  ngOnInit() {
+
     this.getClientes();
-    
+
   }
-  
-  
+
+
   onSelect(cliente: Cliente) {
-      this.selectedCliente = cliente;
+    this.selectedCliente = cliente;
   }
-  
+
 
   getClientes(): void {
-     this.service.getAll().subscribe(data => 
-      {
-        this.dataSource = new MatTableDataSource<Cliente>(data);
-//        this.dataSource.connect()
-      });
+    this.service.getAll().subscribe(data => {
+      this.dataSource = new MatTableDataSource<Cliente>(data);
+      //        this.dataSource.connect()
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
-  
-  
+
+
 
 }

@@ -8,18 +8,22 @@
 
 
     <div>
-        <mat-table #clientes [dataSource]="dataSource">
+        <mat-table #clientes [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="nombre">
-                <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-                <mat-cell *matCellDef="let item"> {{item.nombre}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let item" > {{item.nombre}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="apellido">
-                <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{item.apellido}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="ruc">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> RUC </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.ruc}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="estado">
                 <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
@@ -32,14 +36,16 @@
             <ng-container matColumnDef="acciones">
                 <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
                 <mat-cell *matCellDef="let item">
-                    <a mat-button (click)=onSelect(item)>Editar </a>
+                    <a mat-button routerLink="/clientes/{{item.id}}/edit">Editar </a>
                 </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
+        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator>
         <button mat-button routerLink="/clientes/new">Nuevo</button>
-        <button mat-button>Editar</button>
+        
     </div>
 
 </div>
