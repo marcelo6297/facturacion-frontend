@@ -29,8 +29,8 @@ export class ClientesService {
     return this.http.get<Cliente[]>(this.clientesUrl + this.query + search);
   }
   
-  getAllTipos(): Observable<Tipo[]> {
-      return this.http.get<Tipo[]>(this.tiposUrl);
+  getAllTipos(): Observable<string[]> {
+      return this.http.get<string[]>(this.tiposUrl);
   }
 
   saveOrUpdate(item: Cliente) {

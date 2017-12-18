@@ -10,6 +10,7 @@ export class Cliente  {
     id: number;
     nombre: string;
     apellido: string;
+    ruc: string;
     tipo: Tipo;
     activo: boolean;
     createdOn: string;

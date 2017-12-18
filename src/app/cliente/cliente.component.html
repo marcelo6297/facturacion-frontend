@@ -1,48 +1,51 @@
-<div *ngIf="selectedCliente">
-
-    <p>
-        hola probando
-        <a>ID {{ selectedCliente.id }}</a>
-        <a>Nombre {{ selectedCliente.nombre | uppercase }}</a>
-        <input [(ngModel)]="selectedCliente.nombre" placeholder="nombre" />
-        <a mat-button> Hola</a>
-    </p>
-
-</div>
-
 <!--Lista de clientes-->
-<div>
-    <div class="alert alert-success" *ngIf="showMsg">
-        Eliminado con exito!!!;
+<div fxFlex>
+    <div>
+        <div class="alert alert-success" *ngIf="showMsg">
+            Eliminado con exito!!!;
+        </div>
     </div>
+
+
+    <div>
+        <mat-table #clientes [dataSource]="dataSource">
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.nombre}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="apellido">
+                <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.apellido}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="estado">
+                <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.activo}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="tipo">
+                <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.tipo}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <a mat-button (click)=onSelect(item)>Editar </a>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <button mat-button routerLink="/clientes/new">Nuevo</button>
+        <button mat-button>Editar</button>
+    </div>
+
 </div>
 
+<div *ngIf="selectedCliente" fxFlex="33">
 
-<div>
-    <mat-table #clientes [dataSource]="dataSource">
-        <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="nombre">
-            <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.nombre}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="apellido">
-            <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.apellido}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="estado">
-            <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.activo}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="acciones">
-            <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-            <mat-cell *matCellDef="let item"> <a mat-button (click)=onSelect(item)>Borrar </a></mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-    <button mat-button routerLink="/clientes/new">Nuevo</button>
-    <button mat-button>Editar</button>
+    <app-cliente-detail [cliente]="selectedCliente"></app-cliente-detail>
+
 </div>

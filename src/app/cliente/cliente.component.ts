@@ -21,7 +21,7 @@ export class ClienteComponent implements OnInit {
 
   
   dataSource: MatTableDataSource<Cliente> ;
-  displayedColumns = ['id', 'nombre', 'apellido', 'estado', 'acciones'];
+  displayedColumns = ['id', 'nombre', 'apellido', 'estado', 'tipo','acciones'];
   selectedCliente: Cliente ;
   clientes: Cliente[];
   showMsg = false;

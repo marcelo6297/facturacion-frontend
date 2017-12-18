@@ -1,46 +1,67 @@
 
  <mat-card>
+  <form [formGroup]="formCliente" novalidate>
+    <mat-card-header color="primary">
+      Nuevo Cliente
+      
+    </mat-card-header>
+    
+    <mat-card-content>
+      
+      <div *ngIf=showError >
+        {{ error }}
+      </div>
+      <div class="cliente-container">
+        <mat-form-field>
+          <input matInput placeholder="Nombre" formControlName="nombre">
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput placeholder="Apellido" formControlName="apellido">
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput placeholder="CI o RUC" formControlName="ruc">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Telefono" formControlName="telefono">
+        </mat-form-field>
+        <div formGroupName="direccion" >
 
-  <mat-card-header color="primary">
-    Nuevo Cliente
-  </mat-card-header>
-
-  <mat-card-content>
-
-    <div class="cliente-container">
-      <mat-form-field>
-        <input matInput placeholder="Nombre" [(ngModel)]="cliente.nombre">
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Apellido" [(ngModel)]="cliente.apellido">
-      </mat-form-field>
-
-
-      <mat-form-field>
-        <mat-select placeholder="Tipo" [(ngModel)]="tipo">
-          <mat-option *ngFor="let tipo of tipos" [value]="tipo">
-            {{ tipo.nombre }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <section>
-        <mat-checkbox #myCheckbox>Esta Activo?</mat-checkbox>
-      </section>
-
-
-      <mat-form-field>
-        <input matInput [matDatepicker]="myDatepicker">
-        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-        <mat-datepicker #myDatepicker></mat-datepicker>
-      </mat-form-field>
-    </div>
-  </mat-card-content>
-
-  <mat-card-actions>
-    <button mat-button (click)=back()>Volver</button>
-    <button mat-button (click)=saveOrUpdate()>Guardar</button>
-
-  </mat-card-actions>
-</mat-card>
+          <mat-form-field>
+            <input matInput placeholder="Direccion 1" formControlName="direccion1">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Direccion 2" formControlName="direccion2">
+          </mat-form-field>
+        </div>
+          
+        
+        <mat-form-field>
+          <mat-select placeholder="Tipo" formControlName="tipo">
+            <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+              {{ tipo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <section>
+          <mat-checkbox #myCheckbox formControlName="activo">Esta Activo?</mat-checkbox>
+        </section>
+        
+        
+        <mat-form-field>
+          <input matInput [matDatepicker]="myDatepicker" formControlName="fechaNacimiento">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <button mat-button (click)=back()>Volver</button>
+      <button mat-button (click)=saveOrUpdate()>Guardar</button>
+      
+    </mat-card-actions>
+  </form>
+  </mat-card>

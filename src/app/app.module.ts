@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import { 
+import {
   MatAutocompleteModule,
-  MatButtonModule, 
+  MatButtonModule,
   MatCheckboxModule,
   MatTableModule,
   MatToolbarModule,
@@ -47,10 +47,10 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-//    Material
+    //    Material
     MatAutocompleteModule,
     MatToolbarModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatCheckboxModule,
     MatTableModule,
     MatSidenavModule,
@@ -62,7 +62,7 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
     MatCardModule,
     MatListModule,
     MatPaginatorModule,
-  MatSortModule,  
+    MatSortModule,
     FlexLayoutModule
   ],
   providers: [],

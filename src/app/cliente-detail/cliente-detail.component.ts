@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -14,16 +15,27 @@ import { Tipo, Cliente } from './../modelo/cliente';
 })
 export class ClienteDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private location: Location , private service: ClientesService) {}
+  constructor(private route: ActivatedRoute, private location: Location , private service: ClientesService, private fb: FormBuilder) {}
     
-  tipos: Tipo[];
-  cliente: Cliente;
+  tipos: string[];
+  @Input() cliente: Cliente;
+  showError: boolean;
+  error: any;
   tipo: Tipo ;
+  formCliente: FormGroup;
   ngOnInit() {
       this.getTipos();
-      this.cliente = new Cliente();
+      if (this.cliente != null) {
+          
+        }
+        else {
+
+            this.cliente = new Cliente();
+        }
+      this.createForm();
       
   }
+
   
   getTipos() {
       this.service.getAllTipos().subscribe(res => this.tipos = res);
@@ -33,12 +45,35 @@ export class ClienteDetailComponent implements OnInit {
       this.location.back();
   }
 
+  private createForm() {
+      this.formCliente = this.fb.group({
+          id: [this.cliente.id],
+          nombre: [this.cliente.nombre, Validators.required],
+          apellido: [this.cliente.apellido],
+          ruc: [this.cliente.ruc, Validators.required],
+          activo: [this.cliente.activo],
+          direccion: this.fb.group ({
+              direccion1: '',
+              direccion2: '',
+          }),
+          fechaNacimiento: [this.cliente.createdOn],
+          telefono: [''],
+          tipo: this.cliente.tipo
+      });
+  }
+
   saveOrUpdate() {
-      this.cliente.tipo = this.tipo;
-      this.service.saveOrUpdate(this.cliente).subscribe(res => {
+    //   this.cliente.tipo = this.tipo;
+
+      this.service.saveOrUpdate(this.formCliente.value).subscribe(res => {
           console.log(res);
-          this.cliente = new Cliente();
+          this.showError = false;
+          this.formCliente.reset();
           this.tipo = new Tipo();
+      }, err => {
+          this.showError = true;
+          this.error = err.error.message;
+          console.log(err);
       });
   }
 
