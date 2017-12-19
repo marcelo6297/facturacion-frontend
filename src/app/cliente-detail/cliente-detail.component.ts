@@ -20,6 +20,7 @@ export class ClienteDetailComponent implements OnInit {
     tipos: string[];
     @Input() cliente: Cliente;
     showError: boolean;
+    isEditing = false;
     error: any;
     tipo: Tipo;
     formCliente: FormGroup;
@@ -29,6 +30,7 @@ export class ClienteDetailComponent implements OnInit {
         if (this.location.path() != "/clientes/new") {
             //esta editando
             const id = +this.route.snapshot.paramMap.get('id');
+            this.isEditing = true;
             this.getOne(id);
         }
         this.cliente = new Cliente();
@@ -69,8 +71,9 @@ export class ClienteDetailComponent implements OnInit {
         this.service.saveOrUpdate(this.formCliente.value).subscribe(res => {
             console.log(res);
             this.showError = false;
-            this.formCliente.reset();
-            this.tipo = new Tipo();
+            if (!this.isEditing) {
+                this.formCliente.reset();
+            }
         }, err => {
             this.showError = true;
             this.error = err.error.message;

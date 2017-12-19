@@ -11,7 +11,9 @@
         <mat-table #clientes [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
-                <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+                <mat-cell *matCellDef="let item">  
+                    <mat-checkbox #myCheckbox (change)="aBorrar($event, item.id)" > {{item.id}} </mat-checkbox>
+                </mat-cell>
             </ng-container>
             <ng-container matColumnDef="nombre">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
@@ -33,6 +35,14 @@
                 <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{item.tipo}} </mat-cell>
             </ng-container>
+            <ng-container matColumnDef="fechaNacimiento">
+                <mat-header-cell *matHeaderCellDef> Fecha Nac </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.fechaNacimiento}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="createdOn">
+                <mat-header-cell *matHeaderCellDef> Registrado el</mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.createdOn}} </mat-cell>
+            </ng-container>
             <ng-container matColumnDef="acciones">
                 <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
                 <mat-cell *matCellDef="let item">
@@ -44,7 +54,8 @@
         </mat-table>
         <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
         </mat-paginator>
-        <button mat-button routerLink="/clientes/new">Nuevo</button>
+        <button mat-raised-button (click)="borrar()"  color="warn" [disabled]="borrarDisabled">Borrar ({{ ids.length }})</button>
+        <button mat-raised-button color="primary" routerLink="/clientes/new">Nuevo</button>
         
     </div>
 
