@@ -18,4 +18,15 @@ export class ProductosService {
     return this.http.get<Producto[]>(this.productosUrl);
   }
 
+  /**
+   * Enviar archivos al servidor
+   */
+  postFile(file: File): Observable<Producto[]> {
+
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post<Producto[]>(this.productosUrl + '/upload', formData);
+
+  }
+
 }

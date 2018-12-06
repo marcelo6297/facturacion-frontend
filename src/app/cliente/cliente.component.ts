@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { MatTableDataSource, MatPaginator, MatSort, MatCheckboxChange , MatButton} from '@angular/material';
@@ -62,6 +63,8 @@ export class ClienteComponent implements OnInit {
 
   getClientes(): void {
     this.service.getAll().subscribe(data => {
+      
+      
       this.dataSource = new MatTableDataSource<Cliente>(data);
       //        this.dataSource.connect()
       this.dataSource.paginator = this.paginator;
@@ -71,6 +74,8 @@ export class ClienteComponent implements OnInit {
 
 // Metodo para borrar
   borrar() {
-    console.log(this.ids);
+    this.service.delete(this.ids).subscribe(res => {
+      this.getClientes();
+    });
   }
 }

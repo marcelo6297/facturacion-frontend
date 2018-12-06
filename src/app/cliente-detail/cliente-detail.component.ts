@@ -20,6 +20,8 @@ export class ClienteDetailComponent implements OnInit {
     tipos: string[];
     @Input() cliente: Cliente;
     showError: boolean;
+    showMessage = false;
+    message = "Guardado con exito!!!";
     isEditing = false;
     error: any;
     tipo: Tipo;
@@ -61,7 +63,7 @@ export class ClienteDetailComponent implements OnInit {
             }),
             fechaNacimiento: [new Date(this.cliente.fechaNacimiento)],
             telefono: [this.cliente.telefono],
-            tipo: this.cliente.tipo
+            tipo: [this.cliente.tipo, Validators.required]
         });
     }
 
@@ -71,6 +73,7 @@ export class ClienteDetailComponent implements OnInit {
         this.service.saveOrUpdate(this.formCliente.value).subscribe(res => {
             console.log(res);
             this.showError = false;
+            this.showMessage = true;
             if (!this.isEditing) {
                 this.formCliente.reset();
             }

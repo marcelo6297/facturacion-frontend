@@ -7,12 +7,14 @@ import { of } from 'rxjs/observable/of';
 import { Cliente } from './../modelo/cliente';
 import { Tipo } from './../modelo/cliente';
 import { query } from '@angular/core/src/animation/dsl';
+import { DataRepository } from './data-repository';
 
 @Injectable()
 export class ClientesService {
 
   
-  private clientesUrl = 'api/cliente';
+  private clientesUrl = 'api/clientes';
+  private delteUrl = this.clientesUrl + '/delete';
   private query = '/search?search=';
   private tiposUrl = this.clientesUrl + '/tipos';
   
@@ -34,11 +36,16 @@ export class ClientesService {
   }
 
   getOne(id: number) {
-    return this.http.get<Cliente>(this.clientesUrl+"/"+id);
+    return this.http.get<Cliente>(this.clientesUrl + '/' + id);
   }
 
   saveOrUpdate(item: Cliente) {
     return this.http.post(this.clientesUrl, item);
+  }
+
+ 
+  delete(ids: number[]) {
+    return this.http.post(this.delteUrl, ids);
   }
 
 }

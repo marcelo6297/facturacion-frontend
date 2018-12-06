@@ -30,6 +30,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
 import { ProductosComponent } from './productos/productos.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
+import { ProductosDetailComponent } from './productos-detail/productos-detail.component';
+import { UploadsComponent } from './uploads/uploads.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
     ClienteComponent,
     ClienteDetailComponent,
     ProductosComponent,
-    FacturacionComponent
+    FacturacionComponent,
+    ProductosDetailComponent,
+    UploadsComponent
   ],
   imports: [
     BrowserModule,

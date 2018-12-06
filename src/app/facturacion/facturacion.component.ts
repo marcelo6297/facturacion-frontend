@@ -71,7 +71,7 @@ export class FacturacionComponent implements OnInit {
 
   getClientes() {
     this.service.getAllClientes().subscribe(data => {
-      this.clientes = of (data);
+      // this.clientes = of (data);
     });
   }
 

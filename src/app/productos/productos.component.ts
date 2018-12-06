@@ -14,7 +14,7 @@ import { Producto } from '../modelo/Producto';
 export class ProductosComponent implements OnInit {
 
   dataSource: MatTableDataSource<Producto> ;
-  displayedColumns = ['id', 'nombre', 'descripcion', 'precio', 'iva', 'acciones'];
+  displayedColumns = ['id', 'codigo','nombre', 'descripcion', 'precio', 'iva', 'acciones'];
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
