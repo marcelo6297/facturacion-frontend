@@ -1,3 +1,4 @@
+import {Location} from '@angular/common'
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -17,8 +18,9 @@ export class ClientesService {
   private delteUrl = this.clientesUrl + '/delete';
   private query = '/search?search=';
   private tiposUrl = this.clientesUrl + '/tipos';
+  private exportar = this.clientesUrl + '/exportar';
   
-  constructor(private http: HttpClient) { }
+  constructor( private location: Location, private http: HttpClient) { }
 
   getAll(): Observable<Cliente[]> {
     // return of(CLIENTES);
@@ -46,6 +48,21 @@ export class ClientesService {
  
   delete(ids: number[]) {
     return this.http.post(this.delteUrl, ids);
+  }
+  
+  
+  /**
+   * Traer el archivo desde el servidor
+   * Paso dos filtrar por IDS
+   */
+  getFile() {
+      const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'Application/json; charset=UTF-8'
+      }),
+      responseType: 'text' as 'text'
+    };
+      return this.http.get(this.exportar, httpOptions);
   }
 
 }

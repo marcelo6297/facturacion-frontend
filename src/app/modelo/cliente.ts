@@ -12,14 +12,14 @@ export class Cliente  {
     apellido: string;
     ruc: string;
     telefono: string;
-    direccion: Direccion;
+    direccion1: string; 
+    direccion2: string;
     tipo: Tipo;
     activo: boolean;
     fechaNacimiento: string;
     createdOn: string;
     constructor(){
         this.tipo = new Tipo();
-        this.direccion = new Direccion();
     }
 }
 

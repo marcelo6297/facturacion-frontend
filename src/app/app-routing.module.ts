@@ -1,3 +1,4 @@
+import { UploadsComponent } from './uploads/uploads.component';
 import { NgModule, Component } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,6 +8,8 @@ import { ClienteDetailComponent } from './cliente-detail/cliente-detail.componen
 import { ProductosComponent } from './productos/productos.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { ProductosDetailComponent } from './productos-detail/productos-detail.component';
+import { ComprasComponent } from './compras/compras.component';
+
 
 const rutas: Routes = [
   {path: '', redirectTo: 'index', pathMatch: 'full'},
@@ -14,10 +17,12 @@ const rutas: Routes = [
   {path: 'clientes', component: ClienteComponent, pathMatch: 'full'},
   {path: 'clientes/:id/edit', component: ClienteDetailComponent},
   {path: 'clientes/new', component: ClienteDetailComponent, pathMatch: 'full'},
+  {path: 'clientes/upload', component: UploadsComponent, pathMatch: 'full'},
   {path: 'productos', component: ProductosComponent, pathMatch: 'full'},
   {path: 'productos/new', component: ProductosComponent, pathMatch: 'full'},
   {path: 'productos/varios', component: ProductosDetailComponent, pathMatch: 'full'},
   {path: 'facturacion', component: FacturacionComponent, pathMatch: 'full'},
+  {path: 'compras', component: ComprasComponent, pathMatch: 'full'},
 ];
 
 

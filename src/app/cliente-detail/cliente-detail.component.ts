@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { ClientesService } from './../servicios/clientes.service';
-import { Tipo, Cliente, Direccion } from './../modelo/cliente';
+import { Tipo, Cliente } from './../modelo/cliente';
 
 @Component({
     selector: 'app-cliente-detail',
@@ -57,10 +57,8 @@ export class ClienteDetailComponent implements OnInit {
             apellido: [this.cliente.apellido],
             ruc: [this.cliente.ruc, Validators.required],
             activo: this.cliente.activo,
-            direccion: this.fb.group({
-                direccion1: this.cliente.direccion.direccion1,
-                direccion2: this.cliente.direccion.direccion2,
-            }),
+            direccion1: this.cliente.direccion1,
+            direccion2: this.cliente.direccion2,
             fechaNacimiento: [new Date(this.cliente.fechaNacimiento)],
             telefono: [this.cliente.telefono],
             tipo: [this.cliente.tipo, Validators.required]

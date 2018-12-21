@@ -32,6 +32,7 @@ import { ProductosComponent } from './productos/productos.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { ProductosDetailComponent } from './productos-detail/productos-detail.component';
 import { UploadsComponent } from './uploads/uploads.component';
+import { ComprasComponent } from './compras/compras.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { UploadsComponent } from './uploads/uploads.component';
     ProductosComponent,
     FacturacionComponent,
     ProductosDetailComponent,
-    UploadsComponent
+    UploadsComponent,
+    ComprasComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 
 import { ClientesService } from '../servicios/clientes.service';
 import { Cliente } from '../modelo/cliente';
-import { Observable } from 'rxjs/Observable';
+
 
 
 
@@ -27,7 +27,7 @@ export class ClienteComponent implements OnInit {
   borrarDisabled = true;
 
   dataSource: MatTableDataSource<Cliente>;
-  displayedColumns = ['id', 'nombre', 'apellido', 'ruc', 'estado', 'tipo', 'fechaNacimiento', 'createdOn', 'acciones'];
+  displayedColumns = ['id', 'nombre', 'apellido', 'ruc', 'direccion1','direccion2','estado', 'tipo', 'fechaNacimiento', 'createdOn', 'acciones'];
   selectedCliente: Cliente;
   clientes: Cliente[];
   ids: number[]= [];
@@ -77,5 +77,9 @@ export class ClienteComponent implements OnInit {
     this.service.delete(this.ids).subscribe(res => {
       this.getClientes();
     });
+  }
+
+  export(){
+       window.open("api/clientes/exportar");
   }
 }

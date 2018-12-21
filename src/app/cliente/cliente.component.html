@@ -35,6 +35,14 @@
                 <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{item.tipo}} </mat-cell>
             </ng-container>
+            <ng-container matColumnDef="direccion1">
+                <mat-header-cell *matHeaderCellDef> Direccion 1 </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.direccion1}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="direccion2">
+                <mat-header-cell *matHeaderCellDef> Direccion 2 </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.direccion2}} </mat-cell>
+            </ng-container>
             <ng-container matColumnDef="fechaNacimiento">
                 <mat-header-cell *matHeaderCellDef> Fecha Nac </mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{item.fechaNacimiento}} </mat-cell>
@@ -57,7 +65,7 @@
         <button mat-raised-button (click)="borrar()"  color="warn" [disabled]="borrarDisabled">Borrar ({{ ids.length }})</button>
         <button mat-raised-button color="primary" routerLink="/clientes/new">Nuevo</button>
         <button mat-raised-button routerLink="/clientes/upload">Desde Archivo</button>
-        
+        <button mat-raised-button (click)="export()">Exportar</button>
     </div>
 
 </div>
