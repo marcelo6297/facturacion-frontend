@@ -1,0 +1,37 @@
+ <div>
+        <mat-table #compras [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+                <mat-cell *matCellDef="let item">  
+                    <mat-checkbox #myCheckbox (change)="aBorrar($event, item.id)" > {{item.id}} </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="proveedor">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </mat-header-cell>
+                <mat-cell *matCellDef="let item" > {{item.proveedor}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="fechaCompra">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.fechaCompra | date  }}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="totalCompra">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Compra </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.totalCompra}} </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <a mat-button routerLink="/clientes/{{item.id}}/edit">Editar </a>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator>
+        <button mat-raised-button (click)="borrar()"  color="warn" [disabled]="borrarDisabled">Borrar ({{ ids.length }})</button>
+        <button mat-raised-button color="primary" routerLink="/clientes/new">Nuevo</button>
+        <button mat-raised-button routerLink="/clientes/upload">Desde Archivo</button>
+        <button mat-raised-button (click)="export()">Exportar</button>
+    </div>
