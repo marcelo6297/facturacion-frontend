@@ -1,0 +1,49 @@
+<div>
+      <mat-table #compraDetalles [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="codigo">
+          <mat-header-cell *matHeaderCellDef> codigo </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.codigo}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="nombre">
+          <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.nombre}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cantidad">
+          <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.cantidad}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="precioCompra">
+          <mat-header-cell *matHeaderCellDef> precio Compra</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.precioCompra}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="precioVenta">
+          <mat-header-cell *matHeaderCellDef> precio Venta</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.precioVenta}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="iva">
+          <mat-header-cell *matHeaderCellDef> iva </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.iva}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="subTotalIva">
+          <mat-header-cell *matHeaderCellDef> subTotalIva </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.subTotalIva}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="subTotal">
+          <mat-header-cell *matHeaderCellDef> subTotal </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.subTotal}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+          <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <a mat-button (click)=onSelect(item)>Borrar </a>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </div>

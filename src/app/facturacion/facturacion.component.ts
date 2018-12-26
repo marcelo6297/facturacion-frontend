@@ -40,6 +40,7 @@ export class FacturacionComponent implements OnInit {
   constructor(private service: FacturacionService) { }
 
   ngOnInit() {
+    this.dataSource = new MatTableDataSource<ProductosPedidos>( this.pedidos );
     this.pedidosForm.get('cliente').valueChanges.subscribe(data => {
       // if (data.length > 3) {
         this.clientes = this.service.findAllClientes(data).pipe();
@@ -48,7 +49,7 @@ export class FacturacionComponent implements OnInit {
     
     this.getPedido();
     this.getClientes();
-    console.log('ngOnInit');
+    
   }
 
   filter(valor): string[] {
@@ -60,7 +61,7 @@ export class FacturacionComponent implements OnInit {
 
   getPedido() {
     this.pedidos = this.service.getAllProductosPedidos();
-    this.dataSource = new MatTableDataSource<ProductosPedidos>( this.pedidos );
+    this.dataSource.data = this.pedidos;
     this.totalItems = 0;
     this.totalGeneral = 0;
     this.pedidos.forEach(element => {

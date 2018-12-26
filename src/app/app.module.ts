@@ -33,6 +33,8 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
 import { ProductosDetailComponent } from './productos-detail/productos-detail.component';
 import { UploadsComponent } from './uploads/uploads.component';
 import { ComprasComponent } from './compras/compras.component';
+import { AddComprasComponent } from './compras/add-compras.component';
+import { CompraDetallesComponent } from './compra-detalles/compra-detalles.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { ComprasComponent } from './compras/compras.component';
     FacturacionComponent,
     ProductosDetailComponent,
     UploadsComponent,
-    ComprasComponent
+    ComprasComponent,
+    AddComprasComponent,
+    CompraDetallesComponent
   ],
   imports: [
     BrowserModule,
