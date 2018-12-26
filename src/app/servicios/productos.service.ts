@@ -51,5 +51,12 @@ export class ProductosService {
     return this.http.post<Producto[]>(this.urls.productosUrl + '/upload', formData);
 
   }
+  
+  /**
+   * Guardar Compras
+   */
+   save(compra:Compra) : Observable<Compra> {
+       return this.http.post<Compra>(this.urls.compraUrl + '/save', compra);
+   }
 
 }

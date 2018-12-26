@@ -10,6 +10,7 @@ export class Compra {
     proveedor: string;
     fechaCompra: string;
     totalCompra: number = 0.0;
+    compraDetalles: CompraDetalle[];
 }
 
 export class CompraDetalle {

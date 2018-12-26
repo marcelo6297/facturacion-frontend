@@ -61,7 +61,8 @@
         <mat-form-field>
                 <input matInput placeholder="IVA" type="number" formControlName="iva">
         </mat-form-field>
-        
+        <p>{{compraDetalle.subTotalIva}}</p>
+        <p>{{compraDetalle.subTotal}}   </p>
         <mat-card-actions>
             <button mat-raised-button (click)="addDetalle()" >Agregar</button>
         </mat-card-actions>
@@ -74,5 +75,9 @@
         <app-compra-detalles [detalles]="getCompraDetalles()" ></app-compra-detalles>
     </div>
 </mat-card>
-
-
+<mat-card>
+    
+    <mat-card-actions>
+            <button mat-raised-button (click)="guardar()" >Guardar</button>
+    </mat-card-actions>
+</mat-card>
