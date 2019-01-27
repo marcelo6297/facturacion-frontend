@@ -11,6 +11,8 @@ export class ProductosService {
 
   private urls = {
       productosUrl : 'api/productos',
+      productosUpdate : 'api/productos/updateStock',
+      productosDeleteUrl : 'api/productos/delete',
       productosSearchUrl : 'api/productos/search?search=',
       compraUrl    : 'api/compras',
       compraDetalleUrl    : 'api/compraDetalles'
@@ -57,6 +59,25 @@ export class ProductosService {
    */
    save(compra:Compra) : Observable<Compra> {
        return this.http.post<Compra>(this.urls.compraUrl + '/save', compra);
+   }
+  /**
+   * Guardar Producto
+   */
+   saveProducto(prod:Producto) : Observable<Producto> {
+       return this.http.post<Producto>(this.urls.productosUrl, prod);
+   }
+   
+   findOne(id:number) : Observable<Producto>{
+       return this.http.get<Producto>(this.urls.productosUrl + '/' + id);
+   }
+   
+   delete(ids:number[]) {
+       return this.http.post<Producto[]>(this.urls.productosDeleteUrl, ids);
+   }
+   
+   //actualizar el stock
+   updateStock() {
+       return this.http.post(this.urls.productosUpdate, {});
    }
 
 }

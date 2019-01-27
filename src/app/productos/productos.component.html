@@ -1,8 +1,12 @@
+<div *ngIf="showMessage" > {{ mensaje }}</div> 
+
 <div>
     <mat-table #productos [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+            <mat-cell *matCellDef="let item"> 
+              <mat-checkbox #myCheckbox (change)="aBorrar($event, item.id)" > {{item.id}} </mat-checkbox>
+            </mat-cell>
         </ng-container>
         <ng-container matColumnDef="codigo">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </mat-header-cell>
@@ -18,7 +22,23 @@
         </ng-container>
         <ng-container matColumnDef="precio" >
             <mat-header-cell *matHeaderCellDef mat-sort-header> Precio </mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.precio}} </mat-cell>
+            <mat-cell *matCellDef="let item"> {{item.precioVenta}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="stockInicial" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Stock Inicial</mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.stockInicial}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="totalIngreso" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Total Ingreso</mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.totalIngreso}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="totalSalida" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Total Salida</mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.totalSalida}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="totalStock" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Total Stock</mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.totalStock}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="iva">
             <mat-header-cell *matHeaderCellDef> iva </mat-header-cell>
@@ -27,7 +47,7 @@
         <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef> acciones </mat-header-cell>
             <mat-cell *matCellDef="let item">
-                <a mat-button (click)=onSelect(item)>Borrar </a>
+                <a mat-button routerLink="/productos/{{item.id}}/edit">Editar </a>
             </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -37,7 +57,9 @@
     </mat-table>
     <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
     </mat-paginator>
-    <button mat-button routerLink="/productos/new">Nuevo</button>
+    <button mat-raised-button (click)="borrar()"  color="warn" [disabled]="borrarDisabled">Borrar ({{ ids.length }})</button>
+    <button mat-raised-button color="primary" routerLink="/productos/new">Nuevo</button>
+    <button mat-raised-button color="primary" (click)="nuevo()" >Ventana Nuevo</button>
     <button mat-button routerLink="/productos/varios">Desde Archivo</button>
     <button mat-button>Editar</button>
 </div>

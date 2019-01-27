@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClienteComponent } from './cliente/cliente.component';
 import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
 import { ProductosComponent } from './productos/productos.component';
+import { ProductosNewComponent } from './productos/productosNew.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { ProductosDetailComponent } from './productos-detail/productos-detail.component';
 import { ComprasComponent } from './compras/compras.component';
@@ -20,7 +21,8 @@ const rutas: Routes = [
   {path: 'clientes/new', component: ClienteDetailComponent, pathMatch: 'full'},
   {path: 'clientes/upload', component: UploadsComponent, pathMatch: 'full'},
   {path: 'productos', component: ProductosComponent, pathMatch: 'full'},
-  {path: 'productos/new', component: ProductosComponent, pathMatch: 'full'},
+  {path: 'productos/:id/edit', component: ProductosNewComponent, pathMatch: 'full'},
+  {path: 'productos/new', component: ProductosNewComponent, pathMatch: 'full'},
   {path: 'productos/varios', component: ProductosDetailComponent, pathMatch: 'full'},
   {path: 'facturacion', component: FacturacionComponent, pathMatch: 'full'},
   {path: 'compras', component: ComprasComponent, pathMatch: 'full'},

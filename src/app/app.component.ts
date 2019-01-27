@@ -11,9 +11,9 @@ export class AppComponent {
   showSideNav = false;
   menu: any = [
     { titulo: 'Clientes', ruta: '/clientes' },
-    { titulo: 'Nuevo Cliente', ruta: '/clientes/new' },
+//    { titulo: 'Nuevo Cliente', ruta: '/clientes/new' },
     { titulo: 'Productos', ruta: '/productos' },
-    { titulo: 'Productos', ruta: '/productos/new' },
+//    { titulo: 'Productos', ruta: '/productos/new' },
     { titulo: 'Facturacion', ruta: '/facturacion' },
     { titulo: 'Compras', ruta: '/compras' },
   ];

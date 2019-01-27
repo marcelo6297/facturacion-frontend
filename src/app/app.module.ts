@@ -19,7 +19,9 @@ import {
   MatCardModule,
   MatListModule,
   MatPaginatorModule,
-  MatSortModule
+  MatSortModule,
+  MatSnackBarModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -29,6 +31,9 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
 import { ProductosComponent } from './productos/productos.component';
+import { ProductosNewComponent } from './productos/productosNew.component';
+import {ProductoNewDialog} from './dialog/producto-new.dialog';
+import { BorrarDialog } from './dialog/borrar.dialog';
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { ProductosDetailComponent } from './productos-detail/productos-detail.component';
 import { UploadsComponent } from './uploads/uploads.component';
@@ -43,13 +48,17 @@ import { CompraDetallesComponent } from './compra-detalles/compra-detalles.compo
     ClienteComponent,
     ClienteDetailComponent,
     ProductosComponent,
+    ProductosNewComponent,
     FacturacionComponent,
     ProductosDetailComponent,
     UploadsComponent,
     ComprasComponent,
     AddComprasComponent,
-    CompraDetallesComponent
+    CompraDetallesComponent,
+    BorrarDialog,
+    ProductoNewDialog
   ],
+  entryComponents: [BorrarDialog, ProductoNewDialog],
   imports: [
     BrowserModule,
     FormsModule,
@@ -73,6 +82,8 @@ import { CompraDetallesComponent } from './compra-detalles/compra-detalles.compo
     MatListModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSnackBarModule,
+      MatDialogModule,
     FlexLayoutModule
   ],
   providers: [],

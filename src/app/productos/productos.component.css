@@ -2,3 +2,8 @@
     overflow: auto;
     max-height: 500px;
   }
+  .form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
