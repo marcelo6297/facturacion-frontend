@@ -9,7 +9,10 @@ export class Compra {
     id: number;
     proveedor: string;
     fechaCompra: string;
-    totalCompra: number = 0.0;
+    totalExcentas: number = 0.0;    
+    totalIva5: number = 0.0;    
+    totalIva10: number = 0.0; 
+    totalGeneral: number = 0.0;
     compraDetalles: CompraDetalle[];
 }
 
@@ -25,6 +28,8 @@ export class CompraDetalle {
     precioVenta: number;
     iva: number;
     cantidad: number;
-    subTotalIva: number;
-    subTotal: number;
+    excentas: number;
+    iva5: number;
+    iva10: number;
+    
 }

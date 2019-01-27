@@ -1,83 +1,89 @@
 
 <mat-card>
-    
-<form [formGroup]="formCompra" novalidate>
-    <mat-card-header color="primary">
-        Nueva Compra
-        <!-- <div *ngif=showMessage > {{ mensaje }}</div> -->
-    </mat-card-header>
 
-    <mat-card-content>
+    <form [formGroup]="formCompra" novalidate>
+        <mat-card-header color="primary">
+            Nueva Compra
+            <!-- <div *ngif=showMessage > {{ mensaje }}</div> -->
+        </mat-card-header>
+
+        <mat-card-content>
 
 
-        <div class="compra-container">
+            <div class="compra-container">
 
-            <mat-form-field>
-                <input matInput placeholder="Proveedor" formControlName="proveedor">
-            </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Proveedor" formControlName="proveedor">
+                </mat-form-field>
 
-            <mat-form-field>
-                <input matInput [matDatepicker]="myDatepicker" placeholder="Fecha Compra" formControlName="fechaCompra">
-                       <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                <mat-datepicker #myDatepicker></mat-datepicker>
-            </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="myDatepicker" placeholder="Fecha Compra" formControlName="fechaCompra">
+                           <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #myDatepicker></mat-datepicker>
+                </mat-form-field>
 
-            <mat-form-field>
-                <input matInput placeholder="Total Compra" formControlName="totalCompra">
-            </mat-form-field>
+            </div>
 
-        </div>
+        </mat-card-content>
 
-    </mat-card-content>
-
-</form>
-</mat-card>
-
-<mat-card>
-    <form [formGroup]="formDetalles">
-        
-        <mat-form-field>
-        
-        <input matInput placeholder="Producto" formControlName="producto" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let producto of productos | async" [value]="producto" >
-            {{ producto.codigo }}, {{producto.nombre}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-        
-        <mat-form-field>
-            <input matInput placeholder="Cantidad" type="number" formControlName="cantidad">
-        </mat-form-field>
-        <mat-form-field>
-                <input matInput placeholder="Precio Compra" type="number" formControlName="precioCompra">
-        </mat-form-field>
-        <mat-form-field>
-                <input matInput placeholder="Porcentaje Ganancia" type="number" formControlName="porcenGan">
-        </mat-form-field>
-        <mat-form-field>
-                <input matInput placeholder="Precio Venta"  type="number" formControlName="precioVenta">
-        </mat-form-field>
-        <mat-form-field>
-                <input matInput placeholder="IVA" type="number" formControlName="iva">
-        </mat-form-field>
-        <p>{{compraDetalle.subTotalIva}}</p>
-        <p>{{compraDetalle.subTotal}}   </p>
-        <mat-card-actions>
-            <button mat-raised-button (click)="addDetalle()" >Agregar</button>
-        </mat-card-actions>
     </form>
 </mat-card>
 
 <mat-card>
-    
+    <form [formGroup]="formDetalles">
+
+        <mat-form-field>
+
+            <input matInput placeholder="Producto" formControlName="producto" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let producto of productos | async" [value]="producto" >
+                    {{ producto.codigo }}, {{producto.nombre}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Cantidad" type="number" formControlName="cantidad">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Precio Compra" type="number" formControlName="precioCompra">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Porcentaje Ganancia" type="number" formControlName="porcenGan">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Precio Venta"  type="number" formControlName="precioVenta">
+    </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="IVA" formControlName="iva">
+                <mat-option *ngFor="let iva of ivas" [value]="iva">
+                    {{iva}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p>{{compraDetalle.subTotalIva}}</p>
+    <p>{{compraDetalle.subTotal}}   </p>
+    <mat-card-actions>
+        <button mat-raised-button (click)="addDetalle()" >Agregar</button>
+    </mat-card-actions>
+</form>
+</mat-card>
+
+<mat-card>
+
     <div>
         <app-compra-detalles [detalles]="getCompraDetalles()" ></app-compra-detalles>
     </div>
 </mat-card>
 <mat-card>
-    
+
     <mat-card-actions>
-            <button mat-raised-button (click)="guardar()" >Guardar</button>
+        <p>Total Items     {{compraDetalles.length}} Total</p>
+        <p>Total Excentas  {{compra.totalExcentas}} Total</p>
+        <p>Total IVA 5%    {{compra.totalIva5}} Total </p>
+        <p>Total IVA 10%   {{compra.totalIva10}} </p>
+        <p>Total Total IVA {{compra.totalIva}}</p>
+        <p>Total Total General {{compra.totalGeneral}}</p>
+        <button mat-raised-button (click)="guardar()" >Guardar</button>
     </mat-card-actions>
 </mat-card>

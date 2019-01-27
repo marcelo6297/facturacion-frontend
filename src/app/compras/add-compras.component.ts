@@ -1,19 +1,17 @@
 import {Component, OnInit, Input, Output} from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 import {Compra, CompraDetalle} from '../modelo/Compra';
 import {Producto} from '../modelo/Producto';
-import {ComprasService} from '../servicios/compras.service';
 import {ProductosService} from '../servicios/productos.service';
 
 @Component({
     selector: 'app-add-compras',
     templateUrl: './add-compras.component.html',
     styleUrls: ['./compras.component.css'],
-    providers: [ComprasService, ProductosService]
+    providers: [ProductosService]
 })
 export class AddComprasComponent implements OnInit {
 
@@ -23,16 +21,18 @@ export class AddComprasComponent implements OnInit {
 
 
     compraDetalle: CompraDetalle;
+    ivas = [0,5,10];
     private compraDetalles: CompraDetalle[];
     private compraDetalles$: ReplaySubject<CompraDetalle[]> = new ReplaySubject(1);
     productos: Observable<Producto[]>;
 
-    constructor(private servicio: ProductosService, private service: ComprasService, private fb: FormBuilder) {}
+    constructor(private servicio: ProductosService, private fb: FormBuilder) {}
     ngOnInit() {
         this.getCompras();
         this.compra = new Compra();
         this.compraDetalle = new CompraDetalle();
         this.compraDetalles = new Array<CompraDetalle>();
+        
         this.createForm();
         //      for (var i=0; i<10; i++){
         //          var cd = new CompraDetalle();
@@ -91,7 +91,7 @@ export class AddComprasComponent implements OnInit {
     }
 
     getCompras(): void {
-        this.service.getAll().subscribe(data => {
+        this.servicio.getAll().subscribe(data => {
 
 
 
@@ -105,8 +105,7 @@ export class AddComprasComponent implements OnInit {
         this.formCompra = this.fb.group({
             id: [this.compra.id],
             proveedor: [this.compra.proveedor, Validators.required],
-            fechaCompra: [this.compra.fechaCompra],
-            totalCompra: [this.compra.totalCompra, Validators.required],
+            fechaCompra: [this.compra.fechaCompra]
         });
         this.formDetalles = this.fb.group({
             id: [this.compraDetalle.id],
@@ -150,9 +149,13 @@ export class AddComprasComponent implements OnInit {
             cd.codigo = cd.producto.codigo
 
             this.calcularTotal(cd)
-
+            
             this.compraDetalles.push(cd);
-
+            this.compra.totalExcentas += cd.excentas;
+            this.compra.totalIva5 += cd.iva5;
+            this.compra.totalIva10 += cd.iva10;
+            this.compra.totalGeneral = this.compra.totalExcentas +
+                this.compra.totalIva5 + this.compra.totalIva10;            
             this.compraDetalles$.next(this.compraDetalles);
             this.formDetalles.reset();
         }
@@ -168,8 +171,26 @@ export class AddComprasComponent implements OnInit {
     }
 
     private calcularTotal(cd: CompraDetalle): CompraDetalle {
-        cd.subTotalIva = cd.cantidad * cd.precioCompra * cd.iva / 100;
-        cd.subTotal = cd.cantidad * cd.precioCompra + cd.subTotalIva;
+        switch (cd.iva) {
+            case 0: {
+                cd.excentas= cd.cantidad * cd.precioCompra ;
+                cd.iva5= 0;
+                cd.iva10= 0;
+                break;
+            }
+            case 5: {
+                cd.excentas= 0;
+                cd.iva5= cd.cantidad * cd.precioCompra * cd.iva / 100;
+                cd.iva10= 0;
+                break;
+            }
+            case 10: {
+                cd.excentas= 0;
+                cd.iva5= 0;
+                cd.iva10= cd.cantidad * cd.precioCompra * cd.iva / 100;
+                break;
+            }
+        }
         return cd;
     }
 }
