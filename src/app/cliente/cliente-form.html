@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<form id="form"[formGroup]="form">
+       <div >
+        <mat-form-field>
+          <input matInput placeholder="Nombre" formControlName="nombre">
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput placeholder="Apellido" formControlName="apellido">
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput placeholder="CI o RUC" [readonly]="isEditing" autocomplete="off" formControlName="ruc">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Telefono" autocomplete="off" formControlName="telefono">
+        </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput placeholder="Direccion 1" formControlName="direccion1">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Direccion 2" formControlName="direccion2">
+          </mat-form-field>
+        
+          
+        
+        <mat-form-field>
+          <mat-select placeholder="Tipo" formControlName="tipo">
+            <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+              {{ tipo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <section>
+          <mat-checkbox #myCheckbox formControlName="activo">Esta Activo?</mat-checkbox>
+        </section>
+        
+        
+        <mat-form-field>
+          <input matInput [matDatepicker]="myDatepicker" autocomplete="off" placeholder="Fecha Nacimiento" formControlName="fechaNacimiento">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field> 
+       </div>
+  </form>

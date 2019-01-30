@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>
+    <p *ngIf="isEditing; else notShow ">  Cliente {{cliente.ruc}} </p>
+</h2>
+
+<ng-template #notShow>
+  <p>
+    Nuevo Cliente
+  </p>
+</ng-template>
+
+<mat-dialog-content>
+    <cliente-form [cliente]="cliente" [tipos]="tipos" [isEditing]="isEditing"></cliente-form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button (click)="saveOrUpdate()" [disabled]="clienteForm.form.invalid">Si</button>
+</mat-dialog-actions>

@@ -1,10 +1,15 @@
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Component, OnInit, Input } from '@angular/core';
+
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+
 
 import { ClientesService } from './../servicios/clientes.service';
 import { Tipo, Cliente } from './../modelo/cliente';
+import { ClienteForm } from './../cliente/cliente.component'
 
 @Component({
     selector: 'app-cliente-detail',
@@ -15,30 +20,48 @@ import { Tipo, Cliente } from './../modelo/cliente';
 })
 export class ClienteDetailComponent implements OnInit {
 
-    constructor(private route: ActivatedRoute, private location: Location, private service: ClientesService, private fb: FormBuilder) { }
+    constructor(private route: ActivatedRoute, private location: Location, 
+    private service: ClientesService, 
+    private sb: MatSnackBar) { }
 
-    tipos: string[];
+    @ViewChild(ClienteForm) clienteForm: ClienteForm;
     @Input() cliente: Cliente;
-    showError: boolean;
-    showMessage = false;
-    message = "Guardado con exito!!!";
+    tipos: string[];
+    
+    successMessage = "Guardado con exito!!!";
+    errorMessage = "No se pudo guardar, verifique: RUC o Tipo de Cliente u otro, \n\
+Información adicional: ";
     isEditing = false;
-    error: any;
+    
     tipo: Tipo;
-    formCliente: FormGroup;
+ 
     ngOnInit() {
         this.getTipos();
         //chequear si es nuevo o no 
+        this.cliente = new Cliente();
         if (this.location.path() != "/clientes/new") {
             //esta editando
             const id = +this.route.snapshot.paramMap.get('id');
             this.isEditing = true;
             this.getOne(id);
+            
         }
-        this.cliente = new Cliente();
-        this.createForm();
         
-
+//        this.form = this.service.createForm(this.cliente)
+//        
+//        this.form.get("ruc").valueChanges.pipe(debounceTime(700)).subscribe(val => {
+//
+//            this.service.findByExample(val).subscribe(res => {
+//                if (res) {
+//                    this.form.get("ruc").setErrors({ "notUnique": true });
+//                }
+//            },error => {
+//                console.log(error);
+//            });
+//
+//        });
+        
+         
     }
 
 
@@ -49,45 +72,20 @@ export class ClienteDetailComponent implements OnInit {
     back() {
         this.location.back();
     }
-
-    private createForm() {
-        this.formCliente = this.fb.group({
-            id: [this.cliente.id],
-            nombre: [this.cliente.nombre, Validators.required],
-            apellido: [this.cliente.apellido],
-            ruc: [this.cliente.ruc, Validators.required],
-            activo: this.cliente.activo,
-            direccion1: this.cliente.direccion1,
-            direccion2: this.cliente.direccion2,
-            fechaNacimiento: [new Date(this.cliente.fechaNacimiento)],
-            telefono: [this.cliente.telefono],
-            tipo: [this.cliente.tipo, Validators.required]
-        });
-    }
-
-    saveOrUpdate() {
-        //   this.cliente.tipo = this.tipo;
-
-        this.service.saveOrUpdate(this.formCliente.value).subscribe(res => {
-            console.log(res);
-            this.showError = false;
-            this.showMessage = true;
-            if (!this.isEditing) {
-                this.formCliente.reset();
-            }
-        }, err => {
-            this.showError = true;
-            this.error = err.error.message;
-            console.log(err);
-        });
-    }
-
-    //traer un cliente
     getOne(id: number) {
         this.service.getOne(id).subscribe(res => {
             this.cliente = res;
-            this.createForm();
+            this.clienteForm.createForm(res);
+            
         });
     }
+    
+    saveOrUpdate() {
+            this.service.saveOrUpdate(this.clienteForm.form.value).subscribe(
+                res => {this.sb.open(this.successMessage,"", {duration: 3000})},
+                error => {this.sb.open(this.errorMessage+ error.message,"", {duration: 3000})}
+            );
+        }
+
 
 }

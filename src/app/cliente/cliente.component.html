@@ -55,6 +55,7 @@
                 <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
                 <mat-cell *matCellDef="let item">
                     <a mat-button routerLink="/clientes/{{item.id}}/edit">Editar </a>
+                    <a mat-button (click)=edit(item.id)>Editar </a>
                 </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -64,6 +65,7 @@
         </mat-paginator>
         <button mat-raised-button (click)="borrar()"  color="warn" [disabled]="borrarDisabled">Borrar ({{ ids.length }})</button>
         <button mat-raised-button color="primary" routerLink="/clientes/new">Nuevo</button>
+        <button mat-raised-button color="primary" (click)="nuevo()" >Ventana Nuevo</button>
         <button mat-raised-button routerLink="/clientes/upload">Desde Archivo</button>
         <button mat-raised-button (click)="export()">Exportar</button>
     </div>

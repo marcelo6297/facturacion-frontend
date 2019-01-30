@@ -1,14 +1,10 @@
-import {Location} from '@angular/common'
+import { Location } from '@angular/common'
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 
 
 import { Cliente } from './../modelo/cliente';
-import { Tipo } from './../modelo/cliente';
-import { query } from '@angular/core/src/animation/dsl';
-import { DataRepository } from './data-repository';
 
 @Injectable()
 export class ClientesService {
@@ -17,10 +13,11 @@ export class ClientesService {
   private clientesUrl = 'api/clientes';
   private delteUrl = this.clientesUrl + '/delete';
   private query = '/search?search=';
+  private ruc = this.clientesUrl +'/ruc';
   private tiposUrl = this.clientesUrl + '/tipos';
   private exportar = this.clientesUrl + '/exportar';
   
-  constructor( private location: Location, private http: HttpClient) { }
+  constructor(private location: Location, private http: HttpClient) { }
 
   getAll(): Observable<Cliente[]> {
     // return of(CLIENTES);
@@ -64,5 +61,10 @@ export class ClientesService {
     };
       return this.http.get(this.exportar, httpOptions);
   }
-
+  
+  //Traer por ejemplos
+  findByRuc(ruc):Observable<Boolean>{
+      return this.http.get<Boolean>(this.ruc + '?ruc=' + ruc);
+  }
+  
 }

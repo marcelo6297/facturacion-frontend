@@ -1,8 +1,5 @@
-.cliente-container {
+ div.cliente-container {
   display: flex;
   flex-direction: column;
-}
-
-.cliente-container > * {
   width: 100%;
 }

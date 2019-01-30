@@ -27,7 +27,7 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
-import { ClienteComponent } from './cliente/cliente.component';
+import {ClienteComponent, ClienteFormDialog, ClienteForm } from './cliente/cliente.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
 import { ProductosComponent } from './productos/productos.component';
@@ -40,6 +40,7 @@ import { UploadsComponent } from './uploads/uploads.component';
 import { ComprasComponent } from './compras/compras.component';
 import { AddComprasComponent } from './compras/add-compras.component';
 import { CompraDetallesComponent } from './compra-detalles/compra-detalles.component';
+
 
 
 @NgModule({
@@ -56,9 +57,11 @@ import { CompraDetallesComponent } from './compra-detalles/compra-detalles.compo
     AddComprasComponent,
     CompraDetallesComponent,
     BorrarDialog,
-    ProductoNewDialog
+    ProductoNewDialog,
+    ClienteFormDialog, 
+    ClienteForm
   ],
-  entryComponents: [BorrarDialog, ProductoNewDialog],
+  entryComponents: [BorrarDialog, ProductoNewDialog, ClienteFormDialog],
   imports: [
     BrowserModule,
     FormsModule,
