@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<mat-grid-list cols="4" rowHeight="50px">
+  <mat-grid-tile [colspan]="1" [rowspan]="1" > Exentas   {{ impositivo.totalExcentas | currency }}</mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1" > IVA 5     {{ impositivo.totalIva5 | currency}}</mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1" > IVA 10    {{ impositivo.totalIva10 | currency}} </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="2" > <h2>Total General {{ impositivo.totalGeneral | currency}}</h2></mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1" > IVA 5     {{ iva5 | currency}}</mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1" > IVA 10    {{ iva10 | currency}}</mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1" > TOTAL IVA {{ iva5 + iva10| currency }}</mat-grid-tile>
+</mat-grid-list>
