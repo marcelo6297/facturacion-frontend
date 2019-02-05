@@ -18,28 +18,37 @@
         </ng-container>
         <ng-container matColumnDef="precioCompra">
           <mat-header-cell *matHeaderCellDef> precio Compra</mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.precioCompra}} </mat-cell>
+          <mat-cell *matCellDef="let item"> {{item.precioCompra| currency}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="precioVenta">
           <mat-header-cell *matHeaderCellDef> precio Venta</mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.precioVenta}} </mat-cell>
+          <mat-cell *matCellDef="let item"> {{item.precioVenta | currency}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="iva">
-          <mat-header-cell *matHeaderCellDef> iva </mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.iva}} </mat-cell>
+        <ng-container matColumnDef="porcenIva">
+          <mat-header-cell *matHeaderCellDef> Porcen IVA </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.porcenIva}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="subTotalIva">
-          <mat-header-cell *matHeaderCellDef> subTotalIva </mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.subTotalIva}} </mat-cell>
+        <ng-container matColumnDef="excentas">
+          <mat-header-cell *matHeaderCellDef> Excentas </mat-header-cell>
+          <mat-cell *matCellDef="let item" > {{ !!item.porcenIva==0?item.subTotal:0 | currency }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="iva5">
+          <mat-header-cell *matHeaderCellDef> IVA 5 </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{ (item.porcenIva==5)?item.subTotal+item.montoIva:0 | currency}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="iva10">
+          <mat-header-cell *matHeaderCellDef> IVA 10 </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{ (item.porcenIva==10)?item.subTotal+item.montoIva:0  | currency}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="subTotal">
           <mat-header-cell *matHeaderCellDef> subTotal </mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.subTotal}} </mat-cell>
+          <mat-cell *matCellDef="let item"> {{item.subTotal | currency }} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="acciones">
           <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
           <mat-cell *matCellDef="let item">
-            <a mat-button (click)=onSelect(item)>Borrar </a>
+            <a mat-button (click)="edit(item)"> Editar </a>
+            <a mat-button (click)="onBorrar(item)"> Borrar </a>
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

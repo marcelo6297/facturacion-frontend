@@ -16,7 +16,7 @@
             </ng-container>
             <ng-container matColumnDef="totalCompra">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Total Compra </mat-header-cell>
-                <mat-cell *matCellDef="let item"> {{item.totalCompra}} </mat-cell>
+                <mat-cell *matCellDef="let item"> {{item.totalGeneral | currency }} </mat-cell>
             </ng-container>
             
             <ng-container matColumnDef="acciones">

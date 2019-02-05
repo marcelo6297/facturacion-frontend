@@ -5,7 +5,14 @@
  */
 import {Producto} from './Producto';
 
-export class Compra {
+export interface Impositivo {
+    totalExcentas: number;    
+    totalIva5: number ;    
+    totalIva10: number ; 
+    totalGeneral: number ;
+}
+
+export class Compra implements Impositivo{
     id: number;
     proveedor: string;
     fechaCompra: string;
@@ -26,10 +33,10 @@ export class CompraDetalle {
     precioCompra: number;
     porcenGan: number;
     precioVenta: number;
-    iva: number;
     cantidad: number;
-    excentas: number;
-    iva5: number;
-    iva10: number;
-    
+    porcenIva: number;
+    montoIva:number;
+    subTotal:number
 }
+
+
