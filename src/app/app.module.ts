@@ -21,7 +21,8 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatGridListModule,
 } from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -40,6 +41,10 @@ import { UploadsComponent } from './uploads/uploads.component';
 import { ComprasComponent } from './compras/compras.component';
 import { AddComprasComponent } from './compras/add-compras.component';
 import { CompraDetallesComponent } from './compra-detalles/compra-detalles.component';
+import {ComprasService} from './servicios/compras.service'
+import {ProductosService} from './servicios/productos.service'
+import {TotalGeneral} from './totales/total-general'
+
 
 
 
@@ -59,7 +64,9 @@ import { CompraDetallesComponent } from './compra-detalles/compra-detalles.compo
     BorrarDialog,
     ProductoNewDialog,
     ClienteFormDialog, 
-    ClienteForm
+    ClienteForm,
+    TotalGeneral
+    
   ],
   entryComponents: [BorrarDialog, ProductoNewDialog, ClienteFormDialog],
   imports: [
@@ -86,10 +93,11 @@ import { CompraDetallesComponent } from './compra-detalles/compra-detalles.compo
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
-      MatDialogModule,
-    FlexLayoutModule
+    MatDialogModule,
+    FlexLayoutModule,
+    MatGridListModule
   ],
-  providers: [],
+  providers: [ComprasService,ProductosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
