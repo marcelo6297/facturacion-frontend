@@ -52,7 +52,7 @@ export class ProductosNewComponent implements OnInit {
     saveOrUpdate($event) {
         this.showError   = false;
         this.showSuccess = false;
-        this.service.saveProducto(this.formProducto.value).subscribe(res => {
+        this.service.save(this.formProducto.value).subscribe(res => {
             this.showSnack(this.successMessage)
             this.service.updateStock().subscribe(res => {
                 console.log("Update Stock")
@@ -91,7 +91,7 @@ export class ProductosNewComponent implements OnInit {
     }
     
     private findOne(id:number){
-        this.service.findOne(id).subscribe(res => {
+        this.service.getById(id).subscribe(res => {
             this.producto = res;
             this.createForm();
         })

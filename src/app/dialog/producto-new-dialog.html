@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<h2 mat-dialog-title>Nuevo producto</h2>
+<mat-dialog-content>
+    <app-productosNew></app-productosNew>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button [mat-dialog-close]="true">Si</button>
+</mat-dialog-actions>

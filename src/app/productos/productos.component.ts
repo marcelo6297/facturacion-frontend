@@ -26,7 +26,8 @@ export class ProductosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private snackBar: MatSnackBar ,private servicios: ProductosService , public dialog: MatDialog) { }
+  constructor(private snackBar: MatSnackBar ,
+  private servicios: ProductosService , public dialog: MatDialog) { }
 
   /**
    * Set the paginator after the view init since this component will
@@ -97,7 +98,7 @@ export class ProductosComponent implements OnInit {
     }
     
   nuevo() {
-      const dialogRef = this.dialog.open(ProductoNewDialog, {width: 600});
+      const dialogRef = this.dialog.open(ProductoNewDialog, {width: "600px"});
       dialogRef.afterClosed().subscribe(result => {
           console.log(`Dialog result: ${result}`);
       }, error => {
