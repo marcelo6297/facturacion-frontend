@@ -7,7 +7,6 @@ import {
     MatPaginator,
     MatSort,
     MatCheckboxChange,
-    MatButton,
     MatSnackBar,
     MatDialog,
     MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig
@@ -16,11 +15,12 @@ import {
 import {ClientesService} from '../servicios/clientes.service';
 import {Cliente} from '../modelo/cliente';
 import {BorrarDialog} from '../dialog/borrar.dialog';
+import {Globals} from '../globals'
 
 @Component({
     selector: 'cliente-form',
     templateUrl: './cliente-form.html',
-    providers: [ClientesService]
+    providers: [ClientesService  ]
     //    styleUrls: ['./../cliente-detail/cliente-detail.component.css'],
 })
 
@@ -31,7 +31,10 @@ export class ClienteForm implements OnInit {
     @Input() isEditing: boolean;
     form: FormGroup;
 
-    constructor(private fb: FormBuilder, private service: ClientesService) {
+    constructor(
+        private fb: FormBuilder, 
+        private service: ClientesService
+        ) {
 
     }
     ngOnInit() {
@@ -70,7 +73,7 @@ export class ClienteForm implements OnInit {
 @Component({
     selector: 'cliente-form-dialog',
     templateUrl: './cliente-form.dialog.html',
-    providers: [ClientesService]
+    providers: [ClientesService, Globals]
 })
 
 export class ClienteFormDialog implements OnInit {
@@ -79,18 +82,18 @@ export class ClienteFormDialog implements OnInit {
     cliente: Cliente;
     tipos: string[];
     isEditing: boolean;
-    successMessage = "Guardado con exito!!!";
-    errorMessage = "No se pudo guardar, verifique: RUC o Tipo de Cliente u otro, \n\
-Información adicional: ";
+
 
     constructor(private dialogRef: MatDialogRef<ClienteFormDialog>,
         @Inject(MAT_DIALOG_DATA) data, 
         private service: ClientesService,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private global: Globals
     ) {
 
         this.cliente = data.cliente;
         this.isEditing = data.isEditing;
+        console.log(this.global)
     }
 
     ngOnInit() {
@@ -104,7 +107,7 @@ Información adicional: ";
     saveOrUpdate() {
         this.service.saveOrUpdate(this.clienteForm.form.value).subscribe(
             res => {this.dialogRef.close(true)},
-            error => {this.showSnack(this.errorMessage + error.message)}
+            error => {this.showSnack(this.global.messageError.guardar + error.message)}
             );
     }
 //    private createForm()     {
@@ -125,7 +128,7 @@ Información adicional: ";
 //    }
 
     showSnack(message: any) {
-        this.snackBar.open(message, "", {duration: 3000})
+        this.snackBar.open(message, "", {duration: this.global.duration.long})
     }
 }
 
@@ -137,7 +140,7 @@ Información adicional: ";
     selector: 'app-cliente',
     templateUrl: './cliente.component.html',
     styleUrls: ['./cliente.component.css'],
-    providers: [ClientesService]
+    providers: [ClientesService, Globals]
 })
 export class ClienteComponent implements OnInit {
 
@@ -152,14 +155,14 @@ export class ClienteComponent implements OnInit {
     selectedCliente: Cliente;
     clientes: Cliente[];
     ids: number[] = [];
-    showMsg = false;
-    successMessage = "Guardado Ok!!!"
-    errorMessage = "No se pudieron eliminar los elementos seleccionados, información adicional: "
-
+    
+    
     constructor(
         private snackBar: MatSnackBar,
         private dialog: MatDialog,
-        private service: ClientesService) {}
+        private service: ClientesService,
+        private global: Globals
+        ) {}
 
     ngOnInit() {
         this.buildMaterialTable();
@@ -209,7 +212,7 @@ export class ClienteComponent implements OnInit {
                     this.ids = [];
                     this.borrarDisabled = true
                 }, error => {
-                    this.showSnack(this.errorMessage + error.message);
+                    this.showSnack(this.global.messageError.elimiar + error.message);
                 });
             }
 
@@ -232,11 +235,11 @@ export class ClienteComponent implements OnInit {
         const dialogRef = this.dialog.open(ClienteFormDialog, dialogConfig);
         dialogRef.afterClosed().subscribe(res => {
             if (res) {
-                this.showSnack(this.successMessage)
+                this.showSnack(this.global.messageSuccess.guardar)
                 this.getClientes();
             }
         }, error => {
-
+                this.showSnack(this.global.messageError.guardar)
         })
     }
 
@@ -253,11 +256,11 @@ export class ClienteComponent implements OnInit {
         const dialogRef = this.dialog.open(ClienteFormDialog, dialogConfig);
         dialogRef.afterClosed().subscribe(res => {
             if (res) {
-                this.showSnack(this.successMessage)
+                this.showSnack(this.global.messageSuccess.editar)
                 this.getClientes();
             }
         }, error => {
-
+                this.showSnack(this.global.messageError.editar+error.message)
         })
     }
 

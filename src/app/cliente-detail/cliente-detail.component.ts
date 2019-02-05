@@ -10,12 +10,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ClientesService } from './../servicios/clientes.service';
 import { Tipo, Cliente } from './../modelo/cliente';
 import { ClienteForm } from './../cliente/cliente.component'
+import {Globals} from '../globals'
 
 @Component({
     selector: 'app-cliente-detail',
     templateUrl: './cliente-detail.component.html',
     styleUrls: ['./cliente-detail.component.css'],
-    providers: [ClientesService]
+    providers: [ClientesService, Globals]
 
 })
 export class ClienteDetailComponent implements OnInit {
