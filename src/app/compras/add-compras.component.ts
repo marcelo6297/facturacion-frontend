@@ -30,7 +30,7 @@ export class AddComprasComponent implements OnInit {
     compraDetalle: CompraDetalle;
     ivas = [0, 5, 10];
     productos: Observable<Producto[]>;
-    idProductos:string[];
+    idProductos:string[]=[];
 
     private compra$: Subject<Compra>;
     private compraDetalles$: ReplaySubject<CompraDetalle[]>;
@@ -169,11 +169,11 @@ export class AddComprasComponent implements OnInit {
         return producto ? producto.codigo + ', ' + producto.nombre : '';
     }
 
-    private _calcularTotal(cd: CompraDetalle, llamado?): CompraDetalle {
+    private _calcularTotal(det: CompraDetalle, llamado?): CompraDetalle {
         console.log("Calcular total: " + llamado)
-        cd.subTotal = cd.cantidad * cd.precioCompra;
-        cd.montoIva = cd.subTotal * cd.porcenIva / 100;
-        return cd;
+        det.subTotal = det.cantidad * det.precioCompra;
+        det.montoIva = det.subTotal * det.porcenIva / 100;
+        return det;
     }
 
     getById(id: number) {
@@ -182,6 +182,7 @@ export class AddComprasComponent implements OnInit {
                 this.compra = compra
                 this.compraDetalles$.next(this.compra.compraDetalles);
                 this.compra$.next(this.compra);
+                this.idProductos = this._getProductoIds()
                 this.formCompra.setValue({
                     id: this.compra.id,
                     proveedor: this.compra.proveedor,
@@ -204,7 +205,7 @@ export class AddComprasComponent implements OnInit {
         
         switch (cd.porcenIva) {
             case 0:
-                this.compra.totalExcentas += cd.subTotal;
+                this.compra.totalExentas += cd.subTotal;
                 break;
             case 5:
                 this.compra.totalIva5 += cd.subTotal + cd.montoIva;
@@ -214,7 +215,7 @@ export class AddComprasComponent implements OnInit {
                 break;
         }
 
-        this.compra.totalGeneral = this.compra.totalExcentas +
+        this.compra.totalGeneral = this.compra.totalExentas +
         this.compra.totalIva5 + this.compra.totalIva10;
         this.compra.compraDetalles.push(cd);
         this.idProductos.push(cd.producto.id.toString());
@@ -235,7 +236,7 @@ export class AddComprasComponent implements OnInit {
 
         switch (cd.porcenIva) {
             case 0:
-                this.compra.totalExcentas -= cd.subTotal;
+                this.compra.totalExentas -= cd.subTotal;
                 break;
             case 5:
                 this.compra.totalIva5 -= cd.subTotal + cd.montoIva;
@@ -245,7 +246,7 @@ export class AddComprasComponent implements OnInit {
                 break;
         }
 
-        this.compra.totalGeneral = this.compra.totalExcentas +
+        this.compra.totalGeneral = this.compra.totalExentas +
         this.compra.totalIva5 + this.compra.totalIva10;
         this.compra$.next(this.compra);
         this.compraDetalles$.next(this.compra.compraDetalles);
@@ -277,7 +278,7 @@ export class AddComprasComponent implements OnInit {
     private _getProductoIds() {
         var result = [];
         for (var i = 0; i <this.compra.compraDetalles.length ; i++ ) {
-            result.push(this.compra.compraDetalles[i].producto.id)
+            result.push(this.compra.compraDetalles[i].producto.id.toString())
         }
         return result;
     }

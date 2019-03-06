@@ -14,7 +14,8 @@
     precioCompra: number;
     porcenGan: number;
     precioVenta: number;
-    iva: number;
+    porcenIva: number;
+    porcenDesc: number=0;
     //Stock
     stockInicial:number   = 0.0;
     stockMinimo :number   = 0.0;

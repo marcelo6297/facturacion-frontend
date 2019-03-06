@@ -6,20 +6,22 @@
 import {Producto} from './Producto';
 
 export interface Impositivo {
-    totalExcentas: number;    
+    totalExentas: number;    
     totalIva5: number ;    
     totalIva10: number ; 
     totalGeneral: number ;
+    totalDesc: number ;
 }
 
 export class Compra implements Impositivo{
     id: number;
     proveedor: string;
     fechaCompra: string;
-    totalExcentas: number = 0.0;    
+    totalExentas: number = 0.0;    
     totalIva5: number = 0.0;    
     totalIva10: number = 0.0; 
     totalGeneral: number = 0.0;
+    totalDesc: number =0;
     compraDetalles: CompraDetalle[];
 }
 

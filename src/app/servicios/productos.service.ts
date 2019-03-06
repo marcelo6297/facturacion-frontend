@@ -12,7 +12,7 @@ export class ProductosService {
       productosUrl : 'api/productos',
       productosUpdate : 'api/productos/updateStock',
       productosDeleteUrl : 'api/productos/delete',
-      productosSearchUrl : 'api/productos/search?search='
+      productosSearchUrl : 'api/productos/search'
       
   }
   
@@ -32,8 +32,15 @@ export class ProductosService {
    */
   search(search, ids?:string[]): Observable<Producto[]> {
     // return of(CLIENTES);
-      const options = {params: {'id': ids}}
-      return this.http.get<Producto[]>(this.urls.productosSearchUrl+search, options);
+      
+      const options = {
+      params: {
+        'search': search,
+        'ids': ids,
+      }}
+      return this.http.get<Producto[]>(this.urls.productosSearchUrl, options);
+      
+      
   }  
   /**
    * Enviar archivos al servidor

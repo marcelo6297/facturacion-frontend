@@ -36,7 +36,7 @@
 
             <input matInput placeholder="Producto" formControlName="producto" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option  (selectionChange)="productoSelected(ev)" *ngFor="let producto of productos | async" [value]="producto" >
+                <mat-option  *ngFor="let producto of productos | async" [value]="producto" >
                     {{ producto.codigo }}, {{producto.nombre}}
             </mat-option>
         </mat-autocomplete>
