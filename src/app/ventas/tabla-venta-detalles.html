@@ -1,0 +1,59 @@
+<div>
+      <mat-table #compraDetalles [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="codigo">
+          <mat-header-cell *matHeaderCellDef> codigo </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.codigo}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="nombre">
+          <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.nombre}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cantidad">
+          <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.cantidad}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="precio">
+          <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.precio| currency}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="porcenDesc">
+          <mat-header-cell *matHeaderCellDef>% Descuento</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.porcenDesc | currency}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="porcenIva">
+          <mat-header-cell *matHeaderCellDef>IVA</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.porcenIva}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="excentas">
+          <mat-header-cell *matHeaderCellDef> Excentas </mat-header-cell>
+          <mat-cell *matCellDef="let item" > {{ !!item.porcenIva==0?item.subTotal:0 | currency }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="iva5">
+          <mat-header-cell *matHeaderCellDef> IVA 5 </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{ (item.porcenIva==5)?item.subTotal+item.montoIva:0 | currency}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="iva10">
+          <mat-header-cell *matHeaderCellDef> IVA 10 </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{ (item.porcenIva==10)?item.subTotal+item.montoIva:0  | currency}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="montoDesc">
+          <mat-header-cell *matHeaderCellDef> Monto Desc. </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.montoDesc | currency }} </mat-cell>
+        </ng-container>
+       
+        <ng-container matColumnDef="acciones">
+          <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <a mat-button (click)="edit(item)"> Editar </a>
+            <a mat-button (click)="borrar(item)"> Borrar </a>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </div>

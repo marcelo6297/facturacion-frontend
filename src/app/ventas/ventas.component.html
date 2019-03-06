@@ -1,0 +1,39 @@
+<mat-card>
+
+    <mat-card-header color="primary">
+        <h2 *ngIf="isEditing;">
+            Ventas cliente: {{venta.cliente.ruc}}
+        </h2> 
+    </mat-card-header>
+    <ventas-form [venta$]="venta$"></ventas-form>
+</mat-card>
+
+<mat-card>
+
+
+    <detalle-venta-form></detalle-venta-form>
+
+    <mat-card-actions>
+        <button mat-raised-button [disabled]="detalleInvalido()" (click)="agregarDetalle()">Agregar</button>
+    </mat-card-actions>
+</mat-card>
+
+
+
+<mat-card>
+    <tabla-venta-detalles (onSelect)="editar($event)" (onBorrar)="borrar($event)" [detalles]="getVentaDetalles$()"></tabla-venta-detalles>
+</mat-card>
+<mat-card>
+
+    <total-general [impositivo$]="getImpositivo$()"></total-general>
+
+
+</mat-card> 
+
+<mat-card>
+    <mat-card-actions>
+        <button mat-raised-button routerLink="/ventas" >Volver</button>
+        <button mat-raised-button color="primary" [disabled]="facturaInvalida()" (click)="guardar()">Guardar</button>
+    </mat-card-actions>
+</mat-card>    
+

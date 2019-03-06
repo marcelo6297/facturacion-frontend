@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<h4>Dato: {{selectedProducto.descripcion}}</h4>
+<form [formGroup]="form" novalidate>
+      
+      <mat-form-field>
+        
+        <input matInput placeholder="Código" formControlName="producto" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
+          <mat-option *ngFor="let producto of producto$ | async" [value]="producto" >
+            {{ producto.codigo }}, {{producto.nombre}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Cantidad" type="number" autocomplete="off"formControlName="cantidad">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <input matInput placeholder="Precio" readonly formControlName="precio">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <input matInput placeholder="% Descuento" type="number" autocomplete="off" formControlName="porcenDesc">
+      </mat-form-field>
+
+</form>
+

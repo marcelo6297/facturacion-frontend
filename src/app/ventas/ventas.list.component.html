@@ -1,0 +1,65 @@
+
+<div>
+        <mat-table #ventas [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+                <mat-cell *matCellDef="let item">  
+                    <mat-checkbox #myCheckbox (change)="aBorrar($event, item.id)" > {{item.id}} </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="condicionVenta">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> condicionVenta </mat-header-cell>
+                <mat-cell *matCellDef="let item" > {{item.condicionVenta}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="cliente">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> cliente </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.cliente.nombre }}, {{item.cliente.ruc }}  </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="vendedor">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> vendedor </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{ item.vendedor }} </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="tipoDocumento">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> tipoDocumento </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{ item.tipoDocumento }} </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="numeroDocumento">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> numeroDocumento </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{ item.numeroDocumento }} </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="fechaVenta">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> fechaVenta </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{ item.fechaVenta }} </mat-cell>
+            </ng-container>
+            
+            
+            <ng-container matColumnDef="creadoEl">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> creadoEl </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{ item.creadoEl }} </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="actualizadoEl">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> actualizadoEl </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{ item.actualizadoEl }} </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <a mat-button routerLink="/ventas/{{item.id}}/edit">Editar </a>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator>
+        <button mat-raised-button (click)="borrar()"  color="warn" [disabled]="borrarDisabled">Borrar ({{ ids.length }})</button>
+        <button mat-raised-button color="primary" routerLink="/ventas/new">Nuevo</button>
+        <button mat-raised-button routerLink="/ventas/upload">Desde Archivo</button>
+        <button mat-raised-button (click)="export()">Exportar</button>
+    </div>

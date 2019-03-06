@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<form [formGroup]="form" novalidate>
+
+    <mat-form-field>
+        <input matInput placeholder="Cliente" formControlName="cliente" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
+            <mat-option *ngFor="let cliente of clientes | async" [value]="cliente" >
+                {{ cliente.nombre }}, {{cliente.apellido}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+<mat-form-field>
+    <input matInput placeholder="Vendedor" formControlName="vendedor">
+</mat-form-field>
+<mat-radio-group formControlName="condicionVenta">
+        <mat-radio-button value="contado">Contado</mat-radio-button>
+        <mat-radio-button value="credito">Credito</mat-radio-button>
+</mat-radio-group>
+<mat-form-field>
+    <input matInput placeholder="Numero Documento" autocomplete="off" formControlName="numeroDocumento">
+</mat-form-field>
+<mat-form-field>
+    <input matInput [matDatepicker]="myDatepicker" autocomplete="off" placeholder="Fecha Venta" formControlName="fechaVenta">
+           <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+</mat-form-field>
+</form>
