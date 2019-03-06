@@ -14,7 +14,8 @@ export class AppComponent {
 //    { titulo: 'Nuevo Cliente', ruta: '/clientes/new' },
     { titulo: 'Productos', ruta: '/productos' },
 //    { titulo: 'Productos', ruta: '/productos/new' },
-    { titulo: 'Facturacion', ruta: '/facturacion' },
+    { titulo: 'Ventas', ruta: '/ventas' },
+    { titulo: 'Nueva Venta', ruta: '/ventas/new' },
     { titulo: 'Compras', ruta: '/compras' },
   ];
   toogleSideNav() {

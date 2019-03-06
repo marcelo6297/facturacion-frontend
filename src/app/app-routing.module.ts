@@ -11,6 +11,8 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
 import { ProductosDetailComponent } from './productos-detail/productos-detail.component';
 import { ComprasComponent } from './compras/compras.component';
 import { AddComprasComponent } from './compras/add-compras.component';
+import { VentasComponent } from './ventas/ventas.component';
+import { VentasListComponent } from './ventas/ventas.list.component';
 
 
 const rutas: Routes = [
@@ -24,10 +26,13 @@ const rutas: Routes = [
   {path: 'productos/:id/edit', component: ProductosNewComponent, pathMatch: 'full'},
   {path: 'productos/new', component: ProductosNewComponent, pathMatch: 'full'},
   {path: 'productos/varios', component: ProductosDetailComponent, pathMatch: 'full'},
-  {path: 'facturacion', component: FacturacionComponent, pathMatch: 'full'},
   {path: 'compras', component: ComprasComponent, pathMatch: 'full'},
   {path: 'compras/new', component: AddComprasComponent, pathMatch: 'full'},
   {path: 'compras/:id/edit', component: AddComprasComponent, pathMatch: 'full'},
+  {path: 'ventas', component: VentasListComponent, pathMatch: 'full'},
+  {path: 'ventas/new', component: VentasComponent, pathMatch: 'full'},
+  {path: 'ventas/:id/edit', component: VentasComponent, pathMatch: 'full'},
+//  {path: 'ventas/new', component: AddVentasComponent, pathMatch: 'full'},
 ];
 
 

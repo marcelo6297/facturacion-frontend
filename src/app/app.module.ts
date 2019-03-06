@@ -23,6 +23,7 @@ import {
   MatSnackBarModule,
   MatDialogModule,
   MatGridListModule,
+  MatRadioModule
 } from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -33,7 +34,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ProductosNewComponent } from './productos/productosNew.component';
-import {ProductoNewDialog} from './dialog/producto-new.dialog';
+import { ProductoNewDialog} from './dialog/producto-new.dialog';
 import { BorrarDialog } from './dialog/borrar.dialog';
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { ProductosDetailComponent } from './productos-detail/productos-detail.component';
@@ -41,9 +42,14 @@ import { UploadsComponent } from './uploads/uploads.component';
 import { ComprasComponent } from './compras/compras.component';
 import { AddComprasComponent } from './compras/add-compras.component';
 import { CompraDetallesComponent } from './compra-detalles/compra-detalles.component';
-import {ComprasService} from './servicios/compras.service'
-import {ProductosService} from './servicios/productos.service'
-import {TotalGeneral} from './totales/total-general'
+import { ComprasService } from './servicios/compras.service'
+import { ProductosService } from './servicios/productos.service'
+import { TotalGeneral } from './totales/total-general';
+import { VentasComponent } from './ventas/ventas.component'
+import { VentasListComponent } from './ventas/ventas.list.component'
+import { VentasForm } from './forms/ventas.form'
+import { DetalleVentaForm } from './forms/detalle-venta.form'
+import { TablaVentaDetalles } from './ventas/tabla-venta-detalles'
 
 
 
@@ -65,7 +71,12 @@ import {TotalGeneral} from './totales/total-general'
     ProductoNewDialog,
     ClienteFormDialog, 
     ClienteForm,
-    TotalGeneral
+    TotalGeneral,
+    VentasComponent,
+    VentasListComponent,
+    VentasForm,
+    DetalleVentaForm,
+    TablaVentaDetalles
     
   ],
   entryComponents: [BorrarDialog, ProductoNewDialog, ClienteFormDialog],
@@ -95,7 +106,8 @@ import {TotalGeneral} from './totales/total-general'
     MatSnackBarModule,
     MatDialogModule,
     FlexLayoutModule,
-    MatGridListModule
+    MatGridListModule,
+      MatRadioModule
   ],
   providers: [ComprasService,ProductosService],
   bootstrap: [AppComponent]
