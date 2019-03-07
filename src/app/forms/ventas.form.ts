@@ -19,10 +19,10 @@ import {Globals} from '../globals'
 export class VentasForm implements OnInit {
 
 
-   @Input() venta$:Observable<Venta>;
     form: FormGroup;
     clientes: Observable<Cliente[]>;
-
+    selectedCliente: Cliente = new Cliente();
+    tipoDocumentos = ["Factura","Recibo","Nota Credito","Presupuesto","Tickets"]
     constructor(
         private service: ClientesService,
         private global: Globals) 
@@ -32,16 +32,16 @@ export class VentasForm implements OnInit {
 
     ngOnInit() {
         this.createForm();
-        
-        this.venta$.subscribe(data => {
-            this._setValues(data)
-        })
-        
+                        
         this.form.get("cliente").valueChanges
             .pipe(debounceTime(this.global.duration.short))
-            .subscribe(val => {
-                console.log("value: "+val)
-                this.clientes = this.service.findAll(val).pipe();
+            .subscribe(res => {
+                if (res && res.id) {
+                    this.selectedCliente = res
+                }
+                else {
+                    this.clientes = this.service.findAll(res).pipe();
+                }
             })
     }
 
@@ -55,13 +55,14 @@ export class VentasForm implements OnInit {
     
     createForm(){
          this.form = new FormGroup({
+             id: new FormControl(),
              cliente: new FormControl(null, Validators.required),
-        condicionVenta: new FormControl(null, Validators.required),
-        vendedor: new FormControl(null, Validators.required),
+            condicionVenta: new FormControl(null, Validators.required),
+            vendedor: new FormControl(null, Validators.required),
         //Tipo documento Recibo Factura, Nota Credito
-        tipoDocumento: new FormControl(),
-        numeroDocumento: new FormControl(null, Validators.required),
-        fechaVenta: new FormControl(null, Validators.required),
+            tipoDocumento: new FormControl(),
+            numeroDocumento: new FormControl(null, Validators.required),
+            fechaVenta: new FormControl(null, Validators.required),
     });
     }
     
@@ -69,8 +70,9 @@ export class VentasForm implements OnInit {
         this.form.reset();
     }
     
-    private _setValues(data:Venta) {
+    public setValues(data:Venta) {
         let value = {
+            id: data.id,
             cliente: data.cliente,
             condicionVenta: data.condicionVenta,
             vendedor: data.vendedor,

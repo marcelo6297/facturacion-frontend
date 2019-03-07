@@ -100,5 +100,10 @@ export class DetalleVentaForm implements OnInit, OnDestroy{
     
     reset(){
         this.form.reset();
+        this.selectedProducto = new Producto()
+    }
+    
+    cantidadInvalid():boolean {
+        return !(this.selectedProducto.totalStock >= this.form.get("cantidad").value);
     }
 }

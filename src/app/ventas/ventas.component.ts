@@ -51,7 +51,6 @@ export class VentasComponent implements OnInit {
       if (this.location.path() != "/ventas/new") {
             //esta editando
             const id = +this.route.snapshot.paramMap.get('id');
-            this.isEditing = true;
             this.getById(id);
             
         }
@@ -60,8 +59,10 @@ export class VentasComponent implements OnInit {
   getById(id:number){
       this._srvc.getById(id).subscribe(res => {
           this.venta = res;
+          this.form.setValues(res);
           this.venta$.next(this.venta);
           this.ventaDetalles$.next(this.venta.ventaDetalles);
+          this.isEditing = true;
       })
   }
   
@@ -175,7 +176,7 @@ export class VentasComponent implements OnInit {
     
     private _showMsg(success: boolean, msg?) {
         if (success) {
-            this.sb.open(this.global.messageSuccess.guardar, "", {duration: this.global.duration.medium})
+            this.sb.open(this.global.messageSuccess.guardar, "", {duration: this.global.duration.long})
         }
         else {
             this.sb.open(this.global.messageError.guardar +msg, "", {duration: this.global.duration.medium})
@@ -183,7 +184,7 @@ export class VentasComponent implements OnInit {
     }
     
     detalleInvalido():boolean{
-        return this.formDetalle.form.invalid;
+        return this.formDetalle.form.invalid || this.formDetalle.cantidadInvalid();
     }
     
     facturaInvalida():boolean{

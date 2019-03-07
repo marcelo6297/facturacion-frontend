@@ -25,9 +25,8 @@ export class VentasListComponent implements OnInit {
         'vendedor',
         'tipoDocumento', //Factura, Presupuesto, Recibo, Remision
         'numeroDocumento',
+        'totalGeneral',
         'fechaVenta',
-        'creadoEl',
-        'actualizadoEl',
         'acciones'];
     ventas: Venta[];
     borrarDisabled = true;

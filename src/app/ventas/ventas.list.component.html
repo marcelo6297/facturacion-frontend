@@ -22,30 +22,27 @@
             </ng-container>
             
             <ng-container matColumnDef="tipoDocumento">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> tipoDocumento </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo Doc</mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{ item.tipoDocumento }} </mat-cell>
             </ng-container>
             
             <ng-container matColumnDef="numeroDocumento">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> numeroDocumento </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>N° Doc</mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{ item.numeroDocumento }} </mat-cell>
             </ng-container>
             
             <ng-container matColumnDef="fechaVenta">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> fechaVenta </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{ item.fechaVenta }} </mat-cell>
             </ng-container>
             
             
-            <ng-container matColumnDef="creadoEl">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> creadoEl </mat-header-cell>
-                <mat-cell *matCellDef="let item"> {{ item.creadoEl }} </mat-cell>
+            <ng-container matColumnDef="totalGeneral">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{ item.totalGeneral | currency}} </mat-cell>
             </ng-container>
             
-            <ng-container matColumnDef="actualizadoEl">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> actualizadoEl </mat-header-cell>
-                <mat-cell *matCellDef="let item"> {{ item.actualizadoEl }} </mat-cell>
-            </ng-container>
+           
             
             <ng-container matColumnDef="acciones">
                 <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>

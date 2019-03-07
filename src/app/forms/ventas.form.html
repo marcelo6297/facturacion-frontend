@@ -4,8 +4,15 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<form [formGroup]="form" novalidate>
 
+<h5>
+Cliente: {{selectedCliente.nombre}}
+</h5> 
+<h5> 
+Cliente RUC: {{selectedCliente.ruc}}
+</h5> 
+
+<form [formGroup]="form" novalidate>
     <mat-form-field>
         <input matInput placeholder="Cliente" formControlName="cliente" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
@@ -22,6 +29,15 @@ and open the template in the editor.
         <mat-radio-button value="contado">Contado</mat-radio-button>
         <mat-radio-button value="credito">Credito</mat-radio-button>
 </mat-radio-group>
+    
+<mat-form-field>
+        <mat-select placeholder="Tipo Doc" formControlName="tipoDocumento">
+            <mat-option *ngFor="let tipoDoc of tipoDocumentos" [value]="tipoDoc">
+                {{tipoDoc}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>    
+    
 <mat-form-field>
     <input matInput placeholder="Numero Documento" autocomplete="off" formControlName="numeroDocumento">
 </mat-form-field>
