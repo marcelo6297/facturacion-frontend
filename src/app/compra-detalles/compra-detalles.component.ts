@@ -26,7 +26,7 @@ export class CompraDetallesComponent implements OnInit, OnDestroy {
         'precioVenta', 'excentas', 'iva5', 'iva10', 'acciones'];
 
     dataSource: MatTableDataSource<CompraDetalle>;
-    subscripciones: Subscription[];
+    subscripciones: Subscription[] = [];
     //candidatos a ser borrados
     subTotalIva: any;
     subTotal: any;
@@ -34,7 +34,6 @@ export class CompraDetallesComponent implements OnInit, OnDestroy {
         this.detalles = new Observable();
         this.evtBorrar = new EventEmitter();
         this.onSelect = new EventEmitter();
-        this.subscripciones = []
     }
 
     ngOnInit() {
@@ -49,11 +48,8 @@ export class CompraDetallesComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnDestroy() {
-        for (let i = 0; i < this.subscripciones.length ;i++){
-            this.subscripciones[i].unsubscribe();
-            console.log("compra-detalles ngOnDestroy")
-        }
+    ngOnDestroy(): void {
+        this.subscripciones.forEach(i => {i.unsubscribe()})
     }
 
     onBorrar(item) {

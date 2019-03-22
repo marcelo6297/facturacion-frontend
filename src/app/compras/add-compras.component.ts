@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
@@ -7,6 +7,7 @@ import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {debounceTime} from 'rxjs/operators/debounceTime';
+import {Subscription} from 'rxjs/Subscription';
 
 import {Compra, CompraDetalle} from '../modelo/Compra';
 import {Producto} from '../modelo/Producto';
@@ -20,7 +21,11 @@ import {Globals} from './../globals'
     styleUrls: ['./compras.component.css'],
     providers: [CompraProductoService, Globals]
 })
-export class AddComprasComponent implements OnInit {
+export class AddComprasComponent implements OnInit , OnDestroy{
+    
+    ngOnDestroy(): void {
+        this.subscripciones.forEach(i => {i.unsubscribe()})
+    }
 
     formCompra: FormGroup;
     formDetalles: FormGroup;
@@ -31,6 +36,7 @@ export class AddComprasComponent implements OnInit {
     ivas = [0, 5, 10];
     productos: Observable<Producto[]>;
     idProductos:string[]=[];
+    subscripciones: Subscription[]=[];
 
     private compra$: Subject<Compra>;
     private compraDetalles$: ReplaySubject<CompraDetalle[]>;
@@ -80,7 +86,7 @@ export class AddComprasComponent implements OnInit {
             precioVenta: [this.compraDetalle.precioVenta, Validators.required],
             porcenIva: [this.compraDetalle.porcenIva, Validators.required],
         });
-        this.formDetalles.get('producto').valueChanges.pipe(debounceTime(700))
+        this.subscripciones.push(this.formDetalles.get('producto').valueChanges.pipe(debounceTime(700))
         .subscribe(data => {
 
             if (data && data.id) {
@@ -91,8 +97,8 @@ export class AddComprasComponent implements OnInit {
                     .productoSrvc.search(data, this.idProductos).pipe();
             }
 
-        });
-        this.formDetalles.get('porcenGan').valueChanges.subscribe(data => {
+        }));
+        this.subscripciones.push(this.formDetalles.get('porcenGan').valueChanges.subscribe(data => {
 
             const precioCompra: number = this.formDetalles.get('precioCompra').value
             if (precioCompra != null) {
@@ -100,8 +106,8 @@ export class AddComprasComponent implements OnInit {
                 this.formDetalles.get('precioVenta').setValue(precioVenta, {emitEvent: false});
             }
 
-        });
-        this.formDetalles.get('precioVenta').valueChanges.subscribe(data => {
+        }));
+        this.subscripciones.push(this.formDetalles.get('precioVenta').valueChanges.subscribe(data => {
 
             const precioCompra: number = this.formDetalles.get('precioCompra').value
             if (precioCompra != null) {
@@ -110,8 +116,9 @@ export class AddComprasComponent implements OnInit {
             }
 
 
-        });
-        this.formDetalles.get('precioCompra').valueChanges.subscribe(data => {
+        }));
+        
+        this.subscripciones.push(this.formDetalles.get('precioCompra').valueChanges.subscribe(data => {
 
             const porcenGan: number = this.formDetalles.get('porcenGan').value
             if (porcenGan != null) {
@@ -119,7 +126,7 @@ export class AddComprasComponent implements OnInit {
                 this.formDetalles.get('precioVenta').setValue(precioVenta, {emitEvent: false})
             }
 
-        });
+        }));
         
     }
     guardar() {
@@ -128,9 +135,9 @@ export class AddComprasComponent implements OnInit {
         this.compra.compraDetalles = detalles;
         console.log(this.compra)
         this.servicio.compraSrvc.save(this.compra).subscribe(data => {
-            this.sb.open(this.global.successMessage, "", {duration: this.global.duration.medium})
+            this.sb.open(this.global.messageSuccess.guardar, "", {duration: this.global.duration.medium})
         },
-        error => {this.sb.open(this.global.errorMessage+error, "", {duration: this.global.duration.medium})}
+            error => {this.sb.open(this.global.messageError.guardar+error, "", {duration: this.global.duration.medium})}
         );
 
         //limpiar texto
@@ -142,7 +149,7 @@ export class AddComprasComponent implements OnInit {
 
 
         if (p == null || p.nombre === undefined) {
-            this.sb.open(this.global.errorMessage, "", {duration: this.global.duration.long})
+            this.sb.open(this.global.messageError.guardar, "", {duration: this.global.duration.long})
         }
         else {
 
