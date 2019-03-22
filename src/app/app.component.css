@@ -11,3 +11,9 @@ body {
     overflow: auto;
     max-height: 500px;
   }
+  
+div.form-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

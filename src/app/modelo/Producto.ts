@@ -24,5 +24,6 @@
     totalIngreso:number   = 0.0;
     totalSalida:number    = 0.0;
     totalStock:number     = 0.0;
+    estadoStock:string     = "Normal";
 
  }

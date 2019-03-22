@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Producto } from '../modelo/Producto';
-import {Compra, CompraDetalle} from '../modelo/Compra';
+import {PageableResponse} from '../helpers/PageableResponse'
 
 @Injectable()
 export class ProductosService {
@@ -21,9 +21,10 @@ export class ProductosService {
   /**
    * Retorna la lista de productos desde el servidor
    */
-  getAll(): Observable<Producto[]> {
-
-    return this.http.get<Producto[]>(this.urls.productosUrl);
+  getAll(options: {params?}): Observable<PageableResponse<Producto>> {
+      
+      return this.http.get<PageableResponse<Producto>>(this.urls.productosUrl, options );
+    
   }
   
     
@@ -64,7 +65,7 @@ export class ProductosService {
        return this.http.get<Producto>(this.urls.productosUrl + '/' + id);
    }
    
-   delete(ids:number[]) {
+   delete(ids:number[], ) {
        return this.http.post<Producto[]>(this.urls.productosDeleteUrl, ids);
    }
    

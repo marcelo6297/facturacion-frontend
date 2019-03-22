@@ -5,11 +5,16 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <h2 mat-dialog-title>Nuevo producto</h2>
+
 <mat-dialog-content>
-    <app-productosNew></app-productosNew>
+    <app-productos-form [producto]="producto"></app-productos-form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
+  <button mat-button [mat-dialog-close]="actualizar">No</button>
   <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button mat-button [mat-dialog-close]="true">Si</button>
+  <button mat-button (click)="saveOrUpdate()">OK</button>
+  <button mat-button (click)="saveOrUpdate()" [mat-dialog-close]="actualizar" >Guardar y Cerrar</button>
+  
+  <h4>Total agregados: {{totalAgregado}}</h4>  
+
 </mat-dialog-actions>
