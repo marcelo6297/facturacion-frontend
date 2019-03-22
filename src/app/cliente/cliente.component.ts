@@ -1,7 +1,9 @@
 
-import {Component, OnInit, ViewChild, Input, Inject} from '@angular/core';
+import {Component, OnInit,OnDestroy ,ViewChild, Input, Inject} from '@angular/core';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators/debounceTime';
+import {Subscription} from 'rxjs/Subscription';
+
 import {
     MatTableDataSource,
     MatPaginator,
@@ -20,20 +22,25 @@ import {Globals} from '../globals'
 @Component({
     selector: 'cliente-form',
     templateUrl: './cliente-form.html',
-    providers: [ClientesService  ]
-    //    styleUrls: ['./../cliente-detail/cliente-detail.component.css'],
+    providers: [ClientesService  ],
+    styleUrls: ['./../cliente-detail/cliente-detail.component.css'],
 })
 
-export class ClienteForm implements OnInit {
+export class ClienteForm implements OnInit, OnDestroy {
+    ngOnDestroy(): void {
+        this.subscripciones.forEach(i => {i.unsubscribe()});
+    }
 
     @Input() cliente: Cliente = new Cliente();
     @Input() tipos: string[];
     @Input() isEditing: boolean;
     form: FormGroup;
+    subscripciones: Subscription[]=[];
 
     constructor(
         private fb: FormBuilder, 
-        private service: ClientesService
+        private service: ClientesService,
+        private global: Globals
         ) {
 
     }
@@ -56,7 +63,9 @@ export class ClienteForm implements OnInit {
             telefono: [c.telefono],
             tipo: [c.tipo, Validators.required]
         });
-        this.form.get("ruc").valueChanges.pipe(debounceTime(700)).subscribe(val => {
+        
+        this.subscripciones.push(this.form.get("ruc").valueChanges.pipe(
+            debounceTime(this.global.duration.short)).subscribe(val => {
 
             this.service.findByRuc(val).subscribe(res => {
                 if (res) {
@@ -66,7 +75,7 @@ export class ClienteForm implements OnInit {
                 console.log(error);
             });
 
-        });
+        }));
     }
 }
 
@@ -165,7 +174,7 @@ export class ClienteComponent implements OnInit {
         ) {}
 
     ngOnInit() {
-        this.buildMaterialTable();
+        this._buildMaterialTable();
         this.getClientes();
 
     }
@@ -229,45 +238,49 @@ export class ClienteComponent implements OnInit {
     }
 
     nuevo() {
-        const dialogConfig = new MatDialogConfig();
+//        const dialogConfig = new MatDialogConfig();
         const cliente = new Cliente();
-        dialogConfig.data = {cliente: cliente, isEditing: false}
-        const dialogRef = this.dialog.open(ClienteFormDialog, dialogConfig);
-        dialogRef.afterClosed().subscribe(res => {
-            if (res) {
-                this.showSnack(this.global.messageSuccess.guardar)
-                this.getClientes();
-            }
-        }, error => {
-                this.showSnack(this.global.messageError.guardar)
-        })
+        let dialogData = {data : {cliente: cliente, isEditing: false}, width: '50%' }
+        this._openDialod(dialogData);
     }
 
     edit(id: number) {
-        const dialogConfig = new MatDialogConfig();
+        let cliente;
         for (var i = 0; i < this.dataSource.data.length; i++) {
             if (this.dataSource.data[i].id == id) {
-                dialogConfig.data = {
-                    cliente: this.dataSource.data[i],
-                    isEditing: true
-                }
+                cliente = this.dataSource.data[i]
+                break;
             }
         }
-        const dialogRef = this.dialog.open(ClienteFormDialog, dialogConfig);
-        dialogRef.afterClosed().subscribe(res => {
-            if (res) {
-                this.showSnack(this.global.messageSuccess.editar)
-                this.getClientes();
-            }
-        }, error => {
-                this.showSnack(this.global.messageError.editar+error.message)
-        })
+        let dialogData = {data : {cliente: cliente, isEditing: true}, width: '50%' }
+        this._openDialod(dialogData)
     }
 
-    private buildMaterialTable() {
+    private _buildMaterialTable() {
         this.dataSource = new MatTableDataSource<Cliente>();
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+    }
+    
+    private _openDialod(dialogData:any){
+        let mensajeOK, mensajeNoOK
+        if (dialogData.data.isEditing) {
+            mensajeOK = this.global.messageSuccess.editar;
+            mensajeNoOK = this.global.messageError.editar;
+        }
+        else {
+            mensajeOK = this.global.messageSuccess.guardar;
+            mensajeNoOK = this.global.messageError.guardar;
+        }
+        const dialogRef = this.dialog.open(ClienteFormDialog, dialogData);
+        dialogRef.afterClosed().subscribe(res => {
+            if (res) {
+                this.showSnack(mensajeOK)
+                this.getClientes();
+            }
+        }, error => {
+            this.showSnack(mensajeNoOK + error.message)
+        })
     }
 }
 
