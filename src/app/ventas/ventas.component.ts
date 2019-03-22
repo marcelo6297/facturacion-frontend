@@ -52,7 +52,7 @@ export class VentasComponent implements OnInit {
             //esta editando
             const id = +this.route.snapshot.paramMap.get('id');
             this.getById(id);
-            
+            //desabilitar botones guardar!!!
         }
   }
   

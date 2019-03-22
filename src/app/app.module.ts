@@ -33,10 +33,10 @@ import {ClienteComponent, ClienteFormDialog, ClienteForm } from './cliente/clien
 import { AppRoutingModule } from './app-routing.module';
 import { ClienteDetailComponent } from './cliente-detail/cliente-detail.component';
 import { ProductosComponent } from './productos/productos.component';
-import { ProductosNewComponent } from './productos/productosNew.component';
-import { ProductoNewDialog} from './dialog/producto-new.dialog';
+
+import { ProductosDialog} from './dialog/productos.dialog';
 import { BorrarDialog } from './dialog/borrar.dialog';
-import { FacturacionComponent } from './facturacion/facturacion.component';
+
 import { ProductosDetailComponent } from './productos-detail/productos-detail.component';
 import { UploadsComponent } from './uploads/uploads.component';
 import { ComprasComponent } from './compras/compras.component';
@@ -47,7 +47,9 @@ import { ProductosService } from './servicios/productos.service'
 import { TotalGeneral } from './totales/total-general';
 import { VentasComponent } from './ventas/ventas.component'
 import { VentasListComponent } from './ventas/ventas.list.component'
+
 import { VentasForm } from './forms/ventas.form'
+import { ProductosForm } from './forms/productos.form'
 import { DetalleVentaForm } from './forms/detalle-venta.form'
 import { TablaVentaDetalles } from './ventas/tabla-venta-detalles'
 
@@ -60,26 +62,26 @@ import { TablaVentaDetalles } from './ventas/tabla-venta-detalles'
     ClienteComponent,
     ClienteDetailComponent,
     ProductosComponent,
-    ProductosNewComponent,
-    FacturacionComponent,
+    
     ProductosDetailComponent,
     UploadsComponent,
     ComprasComponent,
     AddComprasComponent,
     CompraDetallesComponent,
     BorrarDialog,
-    ProductoNewDialog,
+    ProductosDialog,
     ClienteFormDialog, 
     ClienteForm,
     TotalGeneral,
     VentasComponent,
     VentasListComponent,
     VentasForm,
+    ProductosForm,
     DetalleVentaForm,
     TablaVentaDetalles
     
   ],
-  entryComponents: [BorrarDialog, ProductoNewDialog, ClienteFormDialog],
+  entryComponents: [BorrarDialog, ProductosDialog, ClienteFormDialog],
   imports: [
     BrowserModule,
     FormsModule,

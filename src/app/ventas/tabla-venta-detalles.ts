@@ -24,7 +24,7 @@ export class TablaVentaDetalles implements OnInit , OnDestroy{
     'precio', 'excentas','iva5','iva10', 'montoDesc', 'acciones'];
     
     dataSource: MatTableDataSource<VentaDetalle> ;
-    suscription: Subscription[]=[];
+    subscripciones: Subscription[]=[];
     
     constructor (){
         this.detalles = new Observable()
@@ -32,17 +32,17 @@ export class TablaVentaDetalles implements OnInit , OnDestroy{
         this.onBorrar = new EventEmitter()
     }
     ngOnInit(): void {
-      this.dataSource = new MatTableDataSource<VentaDetalle>(  );
-      console.log("TablaVentaDetalles: OnInit")
-      this.suscription.push(this.detalles.subscribe(data => {
-          this.dataSource.data = data;
-          
-      })   );
+        this.dataSource = new MatTableDataSource<VentaDetalle>();
+        console.log("TablaVentaDetalles: OnInit")
+        this.subscripciones.push(
+            this.detalles.subscribe(data => {
+                this.dataSource.data = data;
+            })
+        );
     }
     
     ngOnDestroy(): void {
-        for (let i = 0; i < this.suscription.length ; i++)
-            this.suscription[i].unsubscribe();
+        this.subscripciones.forEach(i => {i.unsubscribe()})
     }
     
     edit(item:VentaDetalle){

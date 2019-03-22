@@ -25,6 +25,7 @@ export interface Venta extends Impositivo{
     condicionVenta: string; //Credito, Contado
     cliente: Cliente;
     vendedor: string;
+    estado: string;
     tipoDocumento: string; //Factura, Presupuesto, Recibo, Remision
     numeroDocumento: string;
     fechaVenta: string;

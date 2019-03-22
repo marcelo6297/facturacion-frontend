@@ -1,8 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, OnDestroy,Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {debounceTime} from 'rxjs/operators/debounceTime';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 
 import {Venta} from '../modelo/venta'
 import {Cliente} from '../modelo/cliente'
@@ -16,13 +17,16 @@ import {Globals} from '../globals'
     //    styleUrls: ['./../cliente-detail/cliente-detail.component.css'],
 })
 
-export class VentasForm implements OnInit {
+export class VentasForm implements OnInit, OnDestroy {
 
 
     form: FormGroup;
     clientes: Observable<Cliente[]>;
     selectedCliente: Cliente = new Cliente();
-    tipoDocumentos = ["Factura","Recibo","Nota Credito","Presupuesto","Tickets"]
+    tipoDocumentos = ['Factura', 'Presupuesto', 'Recibo', 'Remision'];
+    estados        = ['Pendiente','Pagado','Anulado'];
+    subscripciones: Subscription[]=[];
+    
     constructor(
         private service: ClientesService,
         private global: Globals) 
@@ -33,7 +37,8 @@ export class VentasForm implements OnInit {
     ngOnInit() {
         this.createForm();
                         
-        this.form.get("cliente").valueChanges
+        this.subscripciones.push( 
+            this.form.get("cliente").valueChanges
             .pipe(debounceTime(this.global.duration.short))
             .subscribe(res => {
                 if (res && res.id) {
@@ -43,6 +48,7 @@ export class VentasForm implements OnInit {
                     this.clientes = this.service.findAll(res).pipe();
                 }
             })
+        )
     }
 
     public getValue(): Venta {
@@ -59,8 +65,9 @@ export class VentasForm implements OnInit {
              cliente: new FormControl(null, Validators.required),
             condicionVenta: new FormControl(null, Validators.required),
             vendedor: new FormControl(null, Validators.required),
+//            estado:   new FormControl(null, Validators.required),
         //Tipo documento Recibo Factura, Nota Credito
-            tipoDocumento: new FormControl(),
+            tipoDocumento: new FormControl('Factura'),
             numeroDocumento: new FormControl(null, Validators.required),
             fechaVenta: new FormControl(null, Validators.required),
     });
@@ -81,5 +88,9 @@ export class VentasForm implements OnInit {
             fechaVenta: data.fechaVenta,
         }
         this.form.setValue(value)
+    }
+    
+    ngOnDestroy(): void {
+        this.subscripciones.forEach(i => {i.unsubscribe()})
     }
 }

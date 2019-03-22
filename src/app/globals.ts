@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Globals {
-  successMessage = "Guardado con exito!!!";
-  errorMessage = "No se pudo guardar, verifique: RUC o Tipo de Cliente u otro, \n\
-Información adicional: ";
+  
 
   messageSuccess = {
       guardar: "Guardado Con Exito!!!",

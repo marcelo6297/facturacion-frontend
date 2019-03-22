@@ -4,7 +4,7 @@
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
                 <mat-cell *matCellDef="let item">  
-                    <mat-checkbox #myCheckbox (change)="aBorrar($event, item.id)" > {{item.id}} </mat-checkbox>
+                    <mat-checkbox #myCheckbox (change)="aAnular($event, item.id)" > {{item.id}} </mat-checkbox>
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="condicionVenta">
@@ -31,6 +31,11 @@
                 <mat-cell *matCellDef="let item"> {{ item.numeroDocumento }} </mat-cell>
             </ng-container>
             
+            <ng-container matColumnDef="estado">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{ item.estado }} </mat-cell>
+            </ng-container>
+            
             <ng-container matColumnDef="fechaVenta">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{ item.fechaVenta }} </mat-cell>
@@ -47,7 +52,8 @@
             <ng-container matColumnDef="acciones">
                 <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
                 <mat-cell *matCellDef="let item">
-                    <a mat-button routerLink="/ventas/{{item.id}}/edit">Editar </a>
+                    <a mat-button routerLink="/ventas/{{item.id}}/edit">Ver</a>
+                    <a mat-button (click)="aAnular(item.id);anular()">Anular</a>
                 </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -55,7 +61,7 @@
         </mat-table>
         <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
         </mat-paginator>
-        <button mat-raised-button (click)="borrar()"  color="warn" [disabled]="borrarDisabled">Borrar ({{ ids.length }})</button>
+        <button mat-raised-button (click)="anular()"  color="warn" [disabled]="anularDisabled">Anular ({{ ids.length }})</button>
         <button mat-raised-button color="primary" routerLink="/ventas/new">Nuevo</button>
         <button mat-raised-button routerLink="/ventas/upload">Desde Archivo</button>
         <button mat-raised-button (click)="export()">Exportar</button>

@@ -13,6 +13,7 @@ import {Cliente} from '../modelo/cliente'
 import {Producto} from '../modelo/producto'
 
 class VentaImpl implements Venta {
+    estado: string;
     totalDesc: number=0;
     id: number;
     condicionVenta: string;
@@ -51,18 +52,15 @@ class VentaDetalleImpl implements VentaDetalle {
 @Injectable()
 export class VentasService {
 
-  productosPedidos: ProductosPedidos[] = ProductosPedidosMock;
   
-  private _url = {venta: 'api/ventas'}
+  
+  private _url = {venta: 'api/ventas', anular:'api/ventas/anular'}
   
   constructor(private clienteService: ClientesService,
   private http: HttpClient
   ) { }
 
-  getAllProductosPedidos(){
-    return this.productosPedidos;
-  }
-
+  
   getAllClientes() {
       return this.clienteService.getAll();
   }
@@ -89,6 +87,10 @@ export class VentasService {
    
    save(v:Venta){
        return this.http.post<Venta>(this._url.venta, v);
+   }
+   
+   anular(ids){
+       return this.http.post<Venta>(this._url.anular, ids);
    }
    
    /**
